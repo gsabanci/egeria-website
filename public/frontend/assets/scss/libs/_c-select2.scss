@@ -1,0 +1,43 @@
+.c-select2 {
+  &--outline {
+    & ~ .select2-container {
+      .select2-selection {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+
+        &__rendered {
+          color: var(--color-gray-900) !important;
+          @include font-medium;
+          font-size: $g-font-size-14;
+          padding-left: 16px !important;
+        }
+
+        &__arrow {
+          height: 100% !important;
+          right: 16px !important;
+
+          b {
+            width: 13px !important;
+            height: 8px !important;
+            border: none !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+
+    &__dropdown {
+      background-color: var(--color-white) !important;
+      @include font-medium;
+      color: var(--color-gray-900);
+      font-size: $g-font-size-14;
+    }
+  }
+}
+
+.select2-results__option {
+  padding: 15px 16px !important;
+}

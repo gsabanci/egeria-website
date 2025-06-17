@@ -1,0 +1,120 @@
+/*CUSTOM CSS*/
+/* .c-giant-card__content span.staff-title {
+  color: #ccc !important;
+} */
+
+/* .staff .c-contact-card__info {
+  margin-right: 0 !important;
+  text-align: center !important;
+}
+
+.staff .c-contact-card__icons {
+  justify-content: center !important;
+} */
+
+.c-blog__content img {
+  margin-top: 24px !important;
+}
+
+.c-filter__buttons .c-button {
+  height: 100% !important;
+  white-space: normal !important;
+  padding: 6px 12px;
+}
+
+/* .c-vertical-tab__content p,
+.c-vertical-tab__content ul,
+.c-vertical-tab__content ul li {
+  color: var(--color-gray) !important;
+  font-family: 'EuclidCircularALight' !important;
+  -webkit-font-smoothing: antialiased !important;
+} */
+
+.c-grid--3 .c-grid__item:last-child {
+  padding-right: 40% !important;
+  padding-left: unset !important;
+}
+
+.c-slider--filter.owl-carousel.no-nav {
+  width: 90.5% !important;
+}
+
+/* .c-filter__buttons .c-slider--filter.owl-carousel:not(.no-nav) {
+  width: 100% !important;
+} */
+
+/* .c-slider--filter .owl-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-top: 0;
+  z-index: -1;
+} */
+
+/* .c-grid__item img {
+  filter: contrast(0) brightness(2);
+} */
+
+/* .c-grid__item img.badimg {
+  filter: grayscale(1) brightness(2) !important;
+} */
+
+.c-slider--projects__item img {
+  height: 100px !important;
+}
+
+/* .mainpage-refs {
+  filter: contrast(0) brightness(2);
+} */
+
+/* .mainpage-refs.badimg {
+  filter: grayscale(1) brightness(2) !important;
+} */
+
+.c-news-card__head img {
+  height: unset !important;
+  aspect-ratio: 111/65 !important;
+}
+
+.c-blog__content p,
+.c-blog__content h4,
+.c-blog__content h5,
+.c-blog__content h3,
+.c-blog__content span {
+  color: #7e8e9b !important;
+}
+
+.c-section--md-top {
+  padding: 100px 0 70px 0 !important;
+}
+
+/* .c-blog__content img {
+  max-height: 300px;
+  object-fit: contain;
+} */
+
+.c-office-card__line svg {
+  margin-right: 0.5rem !important;
+}
+
+.c-slider--projects-mobile .owl-stage {
+  display: flex;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+/* .g-recaptcha {
+  margin-bottom: 24px;
+}
+
+.g-recaptcha.mbl {
+  margin-bottom: 56px !important;
+} */
+
+/* .demoReqButton {
+  position: absolute;
+  bottom: -20px;
+} */

@@ -1,0 +1,71 @@
+.c-icon {
+  //
+  // icon sizes
+  //
+  &__svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  &--xs {
+    width: 12px;
+    height: 12px;
+  }
+
+  &--sm {
+    width: 15px;
+    height: 15px;
+  }
+
+  &--md {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--lg {
+    width: 22px;
+    height: 22px;
+  }
+
+  &--xl {
+    width: 32px;
+    height: 32px;
+  }
+
+  &--xxl {
+    width: 48px;
+    height: 48px;
+  }
+
+  &--wide {
+    width: 70px;
+    height: 23px;
+  }
+  //
+  // icon colors
+  //
+
+  &--primary {
+    color: var(--color-primary);
+  }
+
+  &--secondary {
+    color: var(--color-secondary);
+  }
+
+  &--white {
+    color: var(--color-white);
+  }
+
+  &--dark {
+    color: var(--color-black);
+  }
+
+  &--gray {
+    color: var(--color-gray-light-500);
+  }
+
+  &--gold {
+    color: var(--color-gold);
+  }
+}

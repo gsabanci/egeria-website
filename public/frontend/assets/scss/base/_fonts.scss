@@ -1,0 +1,42 @@
+//
+// Fonts
+//
+
+//
+// EuclidCircularALight
+//
+@font-face {
+	font-family: 'EuclidCircularALight';
+	src: url('../fonts/EuclidCircularALight.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/EuclidCircularALight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/EuclidCircularALight.otf') format('opentype'),
+		/* Open Type Font */ url('../fonts/EuclidCircularALight.svg') format('svg'), /* Legacy iOS */ url('../fonts/EuclidCircularALight.ttf') format('truetype'),
+		/* Safari, Android, iOS */ url('../fonts/EuclidCircularALight.woff') format('woff'), /* Modern Browsers */ url('../fonts/EuclidCircularALight.woff2') format('woff2'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+
+//
+// EuclidCircularARegular
+//
+@font-face {
+	font-family: 'EuclidCircularARegular';
+	src: url('../fonts/EuclidCircularARegular.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/EuclidCircularARegular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/EuclidCircularARegular.otf') format('opentype'),
+		/* Open Type Font */ url('../fonts/EuclidCircularARegular.svg') format('svg'), /* Legacy iOS */ url('../fonts/EuclidCircularARegular.ttf') format('truetype'),
+		/* Safari, Android, iOS */ url('../fonts/EuclidCircularARegular.woff') format('woff'), /* Modern Browsers */ url('../fonts/EuclidCircularARegular.woff2') format('woff2'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}
+
+//
+// EuclidCircularAMedium
+//
+@font-face {
+	font-family: 'EuclidCircularAMedium';
+	src: url('../fonts/EuclidCircularAMedium.eot'); /* IE9 Compat Modes */
+	src: url('../fonts/EuclidCircularAMedium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/EuclidCircularAMedium.otf') format('opentype'),
+		/* Open Type Font */ url('../fonts/EuclidCircularAMedium.svg') format('svg'), /* Legacy iOS */ url('../fonts/EuclidCircularAMedium.ttf') format('truetype'),
+		/* Safari, Android, iOS */ url('../fonts/EuclidCircularAMedium.woff') format('woff'), /* Modern Browsers */ url('../fonts/EuclidCircularAMedium.woff2') format('woff2'); /* Modern Browsers */
+	font-weight: normal;
+	font-style: normal;
+}

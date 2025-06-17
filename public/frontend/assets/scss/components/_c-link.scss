@@ -1,0 +1,27 @@
+.c-link {
+  color: var(--color-white);
+  position: relative;
+
+  svg {
+    margin-left: map-get($g-gaps, 2xsmall);
+    transition: ease-in-out all 0.2s;
+  }
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-white);
+    position: absolute;
+    bottom: -3px;
+  }
+
+  &:hover {
+    color: var(--color-white);
+
+    svg {
+      margin-left: map-get($g-gaps, small);
+      transition: ease-in-out all 0.2s;
+    }
+  }
+}

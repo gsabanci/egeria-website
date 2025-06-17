@@ -1,0 +1,73 @@
+.c-hamburger {
+	display: none;
+}
+
+@include media-breakpoint-down(lg) {
+	.c-hamburger {
+		display: flex;
+		align-items: center;
+		text-align: center;
+		position: relative;
+
+		&__wrapper {
+			cursor: pointer;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			width: auto;
+			height: 100%;
+			margin: 0 auto;
+			transition: all 0.3s ease;
+		}
+
+		&__bar {
+			display: block;
+			height: 2px;
+			width: 25px;
+			background: var(--color-white);
+			margin: 4px auto;
+			transition: all 0.3s ease;
+			border-radius: 100px;
+
+			&--top {
+				margin-top: 0;
+			}
+
+			&--middle {
+				margin: 0 auto;
+			}
+
+			&--bottom {
+				margin-bottom: 0;
+			}
+		}
+
+		&--isActive {
+			.c-hamburger__bar {
+				&--top {
+					transform: translateY(5px) rotateZ(45deg);
+				}
+
+				&--middle {
+					width: 0;
+					opacity: 0;
+				}
+
+				&--bottom {
+					transform: translateY(-7px) rotateZ(-45deg);
+				}
+			}
+		}
+	}
+}
+
+@include media-breakpoint-down(lg) {
+	.c-hamburger {
+		margin-left: map-get($g-gaps, small);
+
+		&__bar {
+			width: 22px;
+		}
+	}
+}

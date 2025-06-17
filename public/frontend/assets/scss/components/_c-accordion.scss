@@ -1,0 +1,77 @@
+.c-accordion {
+  position: relative;
+  height: auto;
+
+  &__row {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    &.is-active {
+      background: var(--color-gray-100);
+      border-radius: 12px;
+    }
+
+    > a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 24px 24px 16px;
+      text-decoration: none;
+      position: relative;
+      color: var(--color-gray-900);
+      @include font-medium;
+      font-size: $g-font-size-base;
+
+      &:not(.is-active) {
+        border-bottom: 1px solid var(--color-gray-300);
+      }
+
+      svg {
+        transform: rotate(0);
+      }
+
+      &.is-active {
+        color: var(--color-gray-900);
+
+        svg {
+          transform: rotate(-180deg);
+          transition: ease 0.3s transform;
+        }
+      }
+    }
+
+    &-title {
+      margin-bottom: 0;
+    }
+
+    &--no-border {
+      a {
+        border-bottom: none !important
+				;
+      }
+    }
+  }
+
+  &__content {
+    // padding: 0 map-get($g-gaps, small) map-get($g-gaps, medium) map-get($g-gaps, small);
+    @include font-light;
+    color: var(--color-gray-700);
+    font-size: $g-font-size-14;
+
+    > p {
+      margin: 0;
+    }
+
+    &-title {
+      @include font-medium;
+      font-size: $g-font-size-20;
+      color: var(--color-secondary);
+      margin-bottom: map-get($g-gaps, small);
+    }
+
+    &-inner {
+      padding: 0 24px 24px 16px;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+.c-office-card {
+  background: var(--color-gray-100);
+  padding: 24px 16px;
+  border-radius: 10px;
+  // min-height: 294px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 99;
+
+  &.active {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      border-radius: 7px;
+      padding: 4px;
+      background: linear-gradient(-180deg, var(--color-purple), var(--color-primary));
+      background: -webkit-gradient(linear, left top, left bottom, from(var(--color-purple)), to(var(--color-primary)));
+      background: -o-linear-gradient(top, var(--color-purple), var(--color-primary));
+      background: linear-gradient(-180deg, var(--color-purple), var(--color-primary));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+    }
+  }
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &__title {
+    @include font-medium;
+    color: var(--color-gray-900);
+    font-size: $g-font-size-20;
+    margin-bottom: map-get($g-gaps, xsmall);
+  }
+
+  &__desc {
+    @include font-light;
+    color: var(--color-gray-700);
+    font-size: $g-font-size-14;
+  }
+
+  &__bold {
+    @include font-medium;
+    color: var(--color-white);
+    font-size: $g-font-size-base;
+    margin-bottom: map-get($g-gaps, small);
+  }
+
+  &__footer {
+    margin-top: 16px;
+  }
+
+  &__line {
+    border-radius: 10px;
+    font-size: $g-font-size-14;
+    color: var(--color-gray-700);
+    @include font-light;
+
+    &:not(:last-child) {
+      margin-bottom: map-get($g-gaps, 2xsmall);
+    }
+
+    svg {
+      margin-right: map-get($g-gaps, small);
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: map-get($g-gaps, normal);
+
+    img {
+      width: 120px;
+    }
+  }
+
+  &--white {
+    background-color: var(--color-white);
+  }
+}

@@ -1,0 +1,8 @@
+.l-wrapper {
+	margin: 120px 0;
+	position: relative;
+
+	&__row {
+		height: calc(100% - 124px);
+	}
+}

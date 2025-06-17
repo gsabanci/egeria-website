@@ -1,0 +1,307 @@
+//
+// Button Colors
+// -------------------------
+$buttons: (
+  primary: (
+    var(--color-primary),
+    var(--color-primary-dark),
+    var(--color-white),
+    var(--color-primary),
+    var(--color-primary-light),
+  ),
+  purple: (
+    var(--color-purple),
+    var(--color-purple-dark),
+    var(--color-white),
+    var(--color-purple),
+    var(--color-purple-light),
+  ),
+  green: (
+    var(--color-green),
+    var(--color-green-dark),
+    var(--color-gray-900),
+    var(--color-green),
+    var(--color-green-light),
+  ),
+  white: (
+    var(--color-white),
+    var(--color-white),
+    var(--color-black),
+    var(--color-white),
+    var(--color-white-light-10),
+  ),
+  white-bordered: (
+    var(--color-white),
+    var(--color-white),
+    var(--color-black),
+    var(--color-gray-200),
+    var(--color-white),
+  ),
+  gradient: (
+    var(--graident-primary),
+    var(--color-black),
+    var(--color-white),
+    var(--color-white-light-10),
+    none,
+  ),
+  gray: (
+    var(--color-gray-900),
+    var(--color-gray-900),
+    var(--color-white),
+    var(--color-gray-900),
+    var(--color-gray-300),
+  ),
+  transparent: (
+    transparent,
+    none,
+    var(--color-gray-700),
+    none,
+    none,
+  ),
+);
+
+@each $name, $colors in $buttons {
+  $bg-color: nth($colors, 1);
+  $hover-color: nth($colors, 2);
+  $text-color: nth($colors, 3);
+  $border-color: nth($colors, 4);
+  $light-color: nth($colors, 5);
+
+  .c-button--#{$name} {
+    background: $bg-color;
+    transition: $g-transition;
+    color: $text-color !important;
+    border: 1px solid $border-color !important;
+
+    &:hover {
+      background-color: $hover-color;
+      transition: $g-transition;
+      border: 1px solid $hover-color !important;
+    }
+  }
+
+  .c-button--outline-#{$name} {
+    background-color: transparent;
+    transition: $g-transition;
+    color: $border-color !important;
+    border: 1px solid $bg-color !important;
+
+    &:hover {
+      color: var(--color-white) !important;
+      background-color: $hover-color;
+      transition: $g-transition;
+      border: 1px solid $hover-color !important;
+    }
+
+    &.c-button--outline-gray {
+      color: var(--color-gray-light-500) !important;
+
+      &:hover {
+        color: var(--color-white) !important;
+      }
+    }
+  }
+
+  .c-button--elevate-#{$name} {
+    background-color: $light-color;
+    transition: $g-transition;
+    color: $border-color !important;
+    border: 1px solid $bg-color !important;
+
+    &:hover {
+      background-color: $bg-color;
+      color: $text-color !important;
+    }
+  }
+}
+
+.c-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  line-height: 1.5;
+  color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  border-radius: $g-border-radius;
+  font-size: $g-font-size-14;
+  white-space: nowrap;
+  overflow: hidden;
+  @include font-regular;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: $g-border-radius-8;
+
+  &:focus {
+    outline: none;
+  }
+
+  &--transparent {
+    text-decoration: underline solid var(--color-gray) 2px !important;
+  }
+
+  &[disabled='disabled'] {
+    opacity: 0.2;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  svg {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  &--only-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: map-get($g-gaps, xsmall);
+
+    &-lg {
+      padding: 0.2px;
+    }
+  }
+
+  //
+  // Pill
+  //
+  &--pill {
+    border-radius: 12px;
+  }
+
+  &--has-shadow {
+    box-shadow: (0px 3px 6px rgba(0, 0, 0, 0.16));
+  }
+
+  //
+  // Custom Sizing
+  //
+
+  &--xs {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    // height: 35px;
+    font-size: $g-font-size-12;
+
+    &.c-button--only-icon {
+      width: 24px;
+      height: 24px;
+      padding: 0;
+    }
+  }
+
+  &--sm {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    // height: 35px;
+    font-size: $g-font-size-14;
+
+    &.c-button--only-icon {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+    }
+  }
+
+  &--md {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    // height: 40px;
+    font-size: $g-font-size-base;
+
+    &.c-button--only-icon {
+      width: 35px;
+      height: 35px;
+      padding: 0;
+    }
+  }
+
+  &--lg {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    // height: 45px;
+    font-size: $g-font-size-18;
+
+    &.c-button--only-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+    }
+  }
+
+  //
+  // Custom Width
+  //
+
+  &--xs-w {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  &--sm-w {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  &--md-w {
+    padding-left: 2.75rem;
+    padding-right: 2.75rem;
+  }
+
+  &--lg-w {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  &--xl-w {
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
+  &--block {
+    width: 100%;
+  }
+
+  //Font Weight
+  &--light {
+    @include font-light;
+  }
+
+  &--regular {
+    @include font-regular;
+  }
+
+  //
+  // Custom Height
+  //
+
+  //
+  // multi-line
+  //
+  &--multi-line {
+    display: inline-grid;
+
+    span {
+      @include font-regular;
+      font-size: 8px;
+      margin-bottom: -3px;
+    }
+  }
+
+  //Fit Content
+  &--fit {
+    max-width: fit-content;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .c-button {
+    &--extra-wide {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+}

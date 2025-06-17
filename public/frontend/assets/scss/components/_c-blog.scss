@@ -1,0 +1,37 @@
+.c-blog {
+  &__date {
+    p {
+      margin-bottom: 0;
+
+      &:first-child {
+        @include font-medium;
+      }
+
+      &:last-child {
+        @include font-light;
+        color: var(--color-gray);
+      }
+    }
+  }
+
+  &__content {
+    margin-top: map-get($g-gaps, small);
+    color: var(--color-gray);
+    @include font-light;
+
+    img {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .c-blog {
+    &__date {
+      text-align: end;
+    }
+  }
+}

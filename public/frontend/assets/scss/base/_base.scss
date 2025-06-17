@@ -1,0 +1,230 @@
+@import './variables';
+@import './breakpoints';
+
+//
+// Base
+//-------------------------
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+:root {
+  --color-primary-dark: #0776c0;
+  --color-primary: #72c9f8;
+  --color-primary-light: #72c9f81a;
+
+  --color-purple-dark: #440064;
+  --color-purple: #8316b6;
+  --color-purple-light: #ae05fd1f;
+
+  --color-green-dark: #00bb5a;
+  --color-green: #33ff94;
+  --color-green-light: #8cffc42f;
+
+  --color-success: #33ff94;
+  --color-success-light: rgba(51, 255, 150, 0.1);
+
+  --color-gray: #7e8e9b;
+
+  --color-gray-100: #f2f4f7;
+  --color-gray-200: #e4e7ec;
+  --color-gray-300: #d0d5dd;
+  --color-gray-400: #b4b4b4;
+  --color-gray-500: #858585;
+  --color-gray-600: #767676;
+  --color-gray-700: #656565;
+  --color-gray-800: #323437;
+  --color-gray-900: #1a1e22;
+
+  --color-white: #fff;
+  --color-white-light-80: rgb(255, 255, 255, 0.8);
+  --color-white-light-10: rgb(255, 255, 255, 0.1);
+  --color-white-light-04: rgb(255, 255, 255, 0.04);
+
+  --color-black-dark: #1a1e22;
+  --color-black: #2b2b2b;
+  --color-black-light: #323437;
+
+  --graident-primary: linear-gradient(90deg, rgba(179, 167, 171, 0.1) 0.04%, rgba(89, 82, 85, 0.2) 101.06%);
+  --graident-primary-light: linear-gradient(90deg, rgba(179, 167, 171, 0.05) 0.04%, rgba(89, 82, 85, 0.15) 101.06%);
+}
+
+::-moz-selection {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+::selection {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden !important;
+
+  background-color: var(--color-white);
+  color: var(--color-black-dark);
+  padding-top: 61px;
+  scroll-behavior: smooth;
+
+  // &::before {
+  //   content: '';
+  //   z-index: -1;
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background: url(../images/background-noise-1-1.png);
+  // }
+
+  &::-webkit-scrollbar {
+    width: 3px;
+    border-radius: 3px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: var(--color-black-light);
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-gray);
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  body {
+    padding-top: 66px;
+  }
+}
+
+h1,
+.h1 {
+  font-size: $g-font-size-h1;
+}
+
+h2,
+.h2 {
+  font-size: $g-font-size-h2;
+}
+
+h3,
+.h3 {
+  font-size: $g-font-size-h3;
+}
+
+h4,
+.h4 {
+  font-size: $g-font-size-h4;
+}
+
+h5,
+.h5 {
+  font-size: $g-font-size-h5;
+}
+
+h6,
+.h6 {
+  font-size: $g-font-size-h6;
+}
+
+a {
+  text-decoration: none !important;
+  color: unset;
+
+  &:hover {
+    color: unset;
+  }
+}
+
+@media (max-width: 1300px) {
+  h1,
+  .h1 {
+    font-size: $g-font-size-h2;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h2,
+  .h2 {
+    font-size: $g-font-size-h3;
+    // font-family: $g-font-weight-semibold;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  h1,
+  .h1 {
+    font-size: $g-font-size-h2;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h2,
+  .h2 {
+    font-size: $g-font-size-h3;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h3,
+  .h3 {
+    font-size: $g-font-size-h3;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h4,
+  .h4 {
+    font-size: $g-font-size-h5;
+    // font-family: $g-font-weight-semibold;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  h1,
+  .h1 {
+    font-size: $g-font-size-h3;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h2,
+  .h2 {
+    font-size: $g-font-size-h4;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h3,
+  .h3 {
+    font-size: $g-font-size-h4;
+    // font-family: $g-font-weight-semibold;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  h1,
+  .h1 {
+    font-size: $g-font-size-h3;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h2,
+  .h2 {
+    font-size: $g-font-size-h4;
+    // font-family: $g-font-weight-semibold;
+  }
+
+  h3,
+  .h3 {
+    font-size: $g-font-size-h4;
+    // font-family: $g-font-weight-semibold;
+  }
+}

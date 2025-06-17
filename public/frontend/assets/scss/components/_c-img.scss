@@ -1,0 +1,12 @@
+.c-img {
+  width: 100%;
+
+  &--rounded {
+    border-radius: 8px;
+  }
+
+  &--fit {
+    height: 430px;
+    object-fit: cover;
+  }
+}

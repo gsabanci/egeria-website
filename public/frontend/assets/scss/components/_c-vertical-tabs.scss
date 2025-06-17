@@ -1,0 +1,113 @@
+.c-vertical-tab {
+  background: var(--color-gray-100);
+  display: flex;
+  width: 100%;
+  padding: map-get($g-gaps, medium);
+  border-radius: 20px;
+  display: flex;
+
+  @include media-breakpoint-down(md) {
+    flex-wrap: wrap;
+  }
+
+  &__pill {
+    color: var(--color-gray-700);
+    font-size: 14px;
+    @include font-light;
+    border-radius: 12px;
+    padding: 12px;
+
+    &-wrapper {
+      width: 30%;
+
+      @include media-breakpoint-down(md) {
+        width: 100%;
+      }
+    }
+
+    &.active {
+      background: var(--color-gray-200);
+      position: relative;
+      color: var(--color-gray-900);
+
+      &:after {
+        content: '';
+        position: absolute;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='14' viewBox='0 0 9 14' fill='none'%3E%3Cpath d='M1 13L7 7L0.999999 1' stroke='%231a1e22' stroke-width='1.5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 10px;
+        height: 10px;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &__content-wrapper {
+    width: 70%;
+
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+  }
+
+  &__content {
+    p {
+      width: 100% !important;
+      color: var(--color-gray-700) !important;
+      @include font-light;
+    }
+
+    img {
+      width: 100% !important;
+      border-radius: 10px;
+      height: 420px;
+      object-fit: cover;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--color-gray-900) !important;
+      @include font-medium;
+    }
+
+    &-inner {
+      padding: 0 map-get($g-gaps, normal);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &-title {
+      @include font-medium;
+    }
+
+    &-desc {
+      color: var(--color-gray);
+      @include font-light;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .c-vertical-tab {
+    padding: map-get($g-gaps, small);
+
+    &__pill-wrapper {
+      margin-bottom: map-get($g-gaps, small);
+    }
+
+    &__content {
+      &-inner {
+        padding-left: 0;
+      }
+    }
+  }
+}

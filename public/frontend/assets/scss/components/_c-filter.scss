@@ -1,0 +1,45 @@
+.c-filter {
+  background: var(--color-gray-100);
+  padding: map-get($g-gaps, normal) map-get($g-gaps, normal) 12px map-get($g-gaps, normal);
+  border-radius: 5px;
+  border: 1px solid var(--color-white-light-04);
+  position: relative;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  &__title {
+    @include font-medium;
+    margin-bottom: 0;
+  }
+
+  &__desc {
+    @include font-light;
+    color: var(--color-gray);
+  }
+
+  &__nav {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__buttons {
+    margin-top: map-get($g-gaps, normal);
+    display: flex;
+    justify-content: center;
+
+    .c-button {
+      &.is-active {
+        border: 1px solid var(--color-primary) !important;
+        background-color: var(--color-primary-light) !important;
+      }
+    }
+
+    .owl-carousel {
+    }
+  }
+}

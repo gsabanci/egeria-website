@@ -1,0 +1,198 @@
+@import '../base/variables';
+
+.c-navbar {
+  &__menu-item {
+    font-size: $g-font-size-14;
+    @include font-medium;
+
+    &:before {
+      content: '';
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, rgba(21, 25, 27, 0) 0%, rgba(255, 255, 255, 0.19) 94.79%);
+      border-radius: 0;
+      transition: height ease-in-out 0.2s;
+    }
+
+    .nav-link {
+      color: var(--color-white);
+      text-transform: capitalize;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      z-index: 9999999;
+
+      &.dropdown-toggle {
+        position: relative;
+        padding-right: 32px !important;
+
+        &:after {
+          display: none;
+        }
+
+        &:before {
+          content: '';
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5' fill='none'%3E%3Cpath d='M7 1L4.09091 4L1 1' stroke='white' stroke-width='0.9'/%3E%3C/svg%3E");
+          height: 8px;
+          width: 8px;
+          background-repeat: no-repeat;
+          top: 5px;
+          bottom: 0;
+          margin: auto 0;
+          position: absolute;
+          right: 16px;
+        }
+      }
+    }
+
+    .dropdown-menu {
+      font-size: $g-font-size-14;
+      max-width: 400px;
+      top: 61px;
+      margin: 0;
+      border: 1px solid var(--color-black-light);
+      background: #1a1e22;
+      border-radius: 0 0 8px 8px;
+
+      .dropdown-item {
+        @include font-regular;
+        color: var(--color-white);
+        padding: map-get($g-gaps, 2xsmall) map-get($g-gaps, small);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:active {
+          background-color: var(--color-secondary);
+        }
+
+        &:hover {
+          background: var(--graident-primary) !important;
+          color: var(--color-white);
+        }
+
+        // &:not(:last-child) {
+        // 	border-bottom: 1px solid var(--color-gray-light);
+        // }
+      }
+
+      .dropdown-divider {
+        border-top: 2px solid var(--color-gray-light);
+      }
+    }
+
+    &--mobile {
+      a {
+        color: var(--color-white);
+        // font-family: $g-font-weight-normal;
+      }
+    }
+
+    &:hover {
+      &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 90%;
+        background: linear-gradient(180deg, rgba(21, 25, 27, 0) 0%, rgba(255, 255, 255, 0.19) 94.79%);
+        transition: height ease-in-out 0.2s;
+      }
+    }
+
+    &.is-active {
+      .nav-link {
+        position: relative;
+
+        &::after {
+          content: '';
+          height: 2px;
+          width: 60%;
+          border-radius: 4px;
+          background-color: var(--color-primary);
+          position: absolute;
+          left: 50%;
+          bottom: 30px;
+          transform: translateX(-50%);
+          animation: borderBottom 0.2s linear alternate;
+        }
+      }
+
+      .l-navbar__megaMenu {
+        display: block !important;
+      }
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__menu {
+    padding-left: map-get($g-gaps, 3xlarge);
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .c-navbar {
+    &__menu {
+      display: none !important;
+    }
+
+    &__right {
+      display: flex;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .c-navbar {
+    &--fixed {
+      height: 60px;
+      padding: map-get($g-gaps, xsmall) map-get($g-gaps, small) !important;
+    }
+
+    &__search {
+      top: 14px;
+
+      &.is-active {
+        top: 71px;
+      }
+
+      &-btn {
+        &-mobile {
+          display: flex;
+          background-color: transparent;
+          color: var(--color-black);
+          padding: 0;
+          margin-left: map-get($g-gaps, xsmall);
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .c-navbar {
+    .navbar-nav {
+      .c-navbar__menu-item {
+        .nav-link {
+          padding-right: map-get($g-gaps, small);
+          padding-left: map-get($g-gaps, small);
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .c-navbar {
+    &__menu {
+      padding-left: map-get($g-gaps, xlarge);
+    }
+  }
+}

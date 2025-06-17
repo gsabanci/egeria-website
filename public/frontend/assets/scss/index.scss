@@ -1,0 +1,94 @@
+//base styles
+@import '../scss/base/mixins/font';
+
+@import '../scss/base/base';
+
+@import '../scss/base/breakpoints';
+
+@import '../scss/base/fonts';
+
+@import '../scss/base/functions';
+
+@import '../scss/base/variables';
+
+//component styles
+@import '../scss/components/c-button';
+
+@import '../scss/components/c-go-top';
+
+@import '../scss/components/c-hamburger';
+
+@import '../scss/components/c-icon';
+
+@import '../scss/components/c-input';
+
+@import '../scss/components/c-mobile-menu';
+
+@import '../scss/components/c-navbar';
+
+@import '../scss/components/c-section';
+
+@import '../scss/components/c-title';
+
+@import '../scss/components/c-footer';
+
+@import '../scss/components/c-link';
+
+@import '../scss/components/c-img';
+
+@import '../scss/components/c-contact-card';
+
+@import '../scss/components/c-service';
+
+@import '../scss/components/c-office-card';
+
+@import '../scss/components/c-news-card';
+
+@import '../scss/components/c-badge';
+
+@import '../scss/components/c-checkbox';
+
+@import '../scss/components/c-blog';
+
+@import '../scss/components/c-grid';
+
+@import '../scss/components/c-giant-card';
+
+@import '../scss/components/c-vertical-tabs';
+
+@import '../scss/components/c-filter';
+
+@import '../scss/components/c-job-card';
+
+@import '../scss/components/c-accordion';
+
+@import '../scss/components/c-modal';
+
+@import '../scss/components/c-breadcrumb';
+
+@import '../scss/components/_c-iconList.scss';
+
+@import '../scss/components/_c-map.scss';
+
+//layout styles
+@import '../scss/layout/l-container';
+
+@import '../scss/layout/l-navbar';
+
+@import '../scss/layout/l-wrapper';
+
+//libs styles
+@import '../scss/libs/custom-owl';
+
+@import '../scss/libs/custom-slick-slider';
+
+@import '../scss/libs/c-select2';
+
+@import '../scss/libs/c-slider-owl';
+
+//utilities styles
+@import '../scss/utilities/margin';
+
+@import '../scss/utilities/other';
+
+@import '../scss/utilities/padding';

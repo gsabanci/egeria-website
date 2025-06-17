@@ -1,0 +1,226 @@
+.c-newsletter {
+  background-image: url('/frontend/assets/images/newsletter-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+  padding: 32px;
+  margin-bottom: 32px;
+  border-radius: 16px;
+
+  &__title {
+    color: var(--color-white);
+    font-size: 24px;
+    @include font-regular;
+    margin-bottom: 16px;
+  }
+
+  &__form {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    &-inputs {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 12px;
+    }
+  }
+}
+
+.c-footer {
+  background-color: var(--color-gray-900);
+  padding: map-get($g-gaps, medium);
+
+  &__logos {
+    display: flex;
+    margin-bottom: map-get($g-gaps, large);
+
+    div {
+      &:first-child {
+        margin-right: map-get($g-gaps, normal);
+
+        img {
+          width: 135px;
+        }
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  &__col {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  &__title {
+    text-transform: capitalize;
+    padding-bottom: map-get($g-gaps, xsmall);
+    color: var(--color-white);
+    @include font-medium;
+  }
+
+  &__list {
+    list-style: none;
+    padding-left: 0;
+
+    &-item {
+      @include font-light;
+      font-size: $g-font-size-14;
+      color: var(--color-gray-400);
+
+      &:not(:first-child) {
+        margin-top: map-get($g-gaps, xsmall);
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    a {
+      display: flex;
+
+      svg {
+        margin-right: map-get($g-gaps, xsmall);
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__newsletter {
+    label {
+      color: var(--color-white);
+      @include font-light;
+      margin-bottom: map-get($g-gaps, normal);
+    }
+
+    &-actions {
+      display: flex;
+      align-items: flex-end;
+
+      input {
+        border: none;
+        background: transparent;
+        border-radius: 0;
+        border-bottom: 1px solid var(--color-white-light-10);
+        padding: map-get($g-gaps, xsmall) 0;
+        @include font-light;
+        color: var(--color-white);
+        margin-right: map-get($g-gaps, normal);
+        height: auto;
+
+        &::placeholder {
+          @include font-light;
+          color: var(--color-white);
+          opacity: 0.5;
+          font-size: $g-font-size-14;
+        }
+
+        &:focus {
+          border: none;
+          border-bottom: 1px solid var(--color-primary);
+        }
+      }
+
+      button {
+        width: 50px;
+        height: 45px;
+      }
+    }
+  }
+}
+
+.c-copyright {
+  padding: map-get($g-gaps, small);
+  font-size: $g-font-size-14;
+  @include font-light;
+  background-color: var(--color-gray-900);
+  border-top: 1px solid var(--color-gray-800);
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    color: var(--color-white);
+
+    div {
+      &:not(:last-child) {
+        margin-right: map-get($g-gaps, 2xlarge);
+      }
+
+      &:hover {
+        text-decoration: underline !important;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+
+    a {
+      &:not(:last-child) {
+        margin-right: map-get($g-gaps, normal);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .c-footer {
+    &__row {
+      flex-wrap: wrap;
+    }
+    &__col {
+      flex-basis: 33%;
+
+      &--15 {
+        flex-basis: 100%;
+        margin-bottom: map-get($g-gaps, small);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .c-footer {
+    &__col {
+      flex-basis: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: map-get($g-gaps, small);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .c-footer {
+    &__col {
+      flex: 1;
+      flex-basis: 0;
+
+      &--15 {
+        flex-basis: 15%;
+        padding-right: 5%;
+      }
+    }
+  }
+}

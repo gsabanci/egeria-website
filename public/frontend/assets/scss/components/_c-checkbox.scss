@@ -1,0 +1,64 @@
+.c-checkbox {
+  &[type='checkbox']:checked,
+  &[type='checkbox']:not(:checked) {
+    position: absolute;
+    left: -9999px;
+  }
+  &[type='checkbox']:checked + label,
+  &[type='checkbox']:not(:checked) + label {
+    position: relative;
+    padding-left: map-get($g-gaps, medium);
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: var(--color-gray);
+    font-size: $g-font-size-base;
+    @include font-light;
+
+    a {
+      // color: var(--color-white);
+      text-decoration: underline !important;
+    }
+  }
+  &[type='checkbox']:checked + label:before,
+  &[type='checkbox']:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 3px;
+  }
+
+  &[type='checkbox']:checked + label:before {
+    border: 1px solid var(--color-primary) !important;
+    background: var(--color-primary-light);
+  }
+
+  &[type='checkbox']:checked + label:after,
+  &[type='checkbox']:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M4.19632 10.2058C4.04557 10.2058 3.89481 10.1481 3.77996 10.0333L0.172757 6.42595C-0.0575858 6.19571 -0.0575858 5.82345 0.172757 5.59322C0.402993 5.36298 0.775144 5.36298 1.00549 5.59322L4.19632 8.78406L10.9946 1.98591C11.2248 1.75567 11.597 1.75567 11.8273 1.98591C12.0575 2.21625 12.0575 2.5884 11.8273 2.81875L4.6128 10.0333C4.49795 10.1481 4.34708 10.2058 4.19632 10.2058V10.2058Z' fill='%2372C9F8'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 2px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  &[type='checkbox']:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  &[type='checkbox']:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
