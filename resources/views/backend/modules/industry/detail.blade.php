@@ -12,7 +12,9 @@
     <!--begin::Header-->
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label font-weight-bolder text-dark">{{ $industry->name }} Detay</span>
+            <span class="card-label font-weight-bolder text-dark">{{ $industry->name }} Detay
+                  <span class="text-primary font-weight-bold ml-2" style="font-size: 14px;">[{{ strtoupper($industry->lang_code) }}]</span>
+            </span>
             <span class="text-muted mt-3 font-weight-bold font-size-sm">Aşağıda sistemde yer alan {{ $industry->name }}
                 adlı
                 endüstri bilgilerini görebilirsiniz.</span>

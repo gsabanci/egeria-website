@@ -28,6 +28,7 @@
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Haber Başlığı</th>
                         <th style="min-width: 120px">Kategori</th>
+                        <th style="min-width: 120px">Dil Kodu</th>
                         <th style="min-width: 120px">Durumu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
@@ -37,12 +38,16 @@
                         <tr>
                             <td>#{{ $n->id }}</td>
                             <td>
-                                <span
-                                    class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $n->title }}</span>
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $n->title }}</span>
                                 <span class="text-muted font-weight-bold"></span>
                             </td>
                             <td><span
                                     class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ !is_null($n->category) ? $n->category->name : '-' }}</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-light-primary font-weight-bolder">
+                                    {{ strtoupper($n->lang_code) }}
+                                </span>
                             </td>
                             <td>
                                 @if ($n->is_active == '1')
@@ -56,9 +61,8 @@
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Write.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
                                                 <path
@@ -78,9 +82,8 @@
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                     <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Trash.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
                                                 <path
@@ -103,8 +106,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Haber Sil</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -131,8 +133,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Haber Ekle</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -176,21 +177,31 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="lang_code" class="col-form-label">Dil</label>
+                                                    <select name="lang_code" class="form-control" required>
+                                                        @foreach ($languages as $lang)
+                                                            <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="recipient-name" class="col-form-label">Kısa
                                                         Açıklama</label>
-                                                    <textarea type="text" class="form-control" name="short_desc" onkeyup="addPrevShort(event)"></textarea>
+                                                    <textarea type="text" class="form-control" name="short_desc"
+                                                        onkeyup="addPrevShort(event)"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="recipient-name" class="col-form-label">Haber
                                                         Detay</label>
-                                                    <textarea class="summernote" type="text" name="detail" class="form-control"></textarea>
+                                                    <textarea class="summernote" type="text" name="detail"
+                                                        class="form-control"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="recipient-name" class="col-form-label">İçerik
                                                         Resmi</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input"
-                                                            name="image" id="customFile1">
+                                                        <input type="file" class="custom-file-input" name="image"
+                                                            id="customFile1">
                                                         <label class="custom-file-label" for="customFile1">Resim
                                                             Seçiniz</label>
                                                     </div>
@@ -199,9 +210,8 @@
                                                     <label for="recipient-name" class="col-form-label">Kapak
                                                         Resmi</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input"
-                                                            name="coverimage" id="customFile1"
-                                                            onchange="addPrevImage(event)">
+                                                        <input type="file" class="custom-file-input" name="coverimage"
+                                                            id="customFile1" onchange="addPrevImage(event)">
                                                         <label class="custom-file-label" for="customFile1">Resim
                                                             Seçiniz</label>
                                                     </div>
@@ -240,44 +250,44 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.summernote').summernote({
                 minHeight: 300
             });
         });
 
-        var editPrevImage = function(event, id) {
+        var editPrevImage = function (event, id) {
             var output = document.getElementById('edit_news_image_' + id);
             output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
+            output.onload = function () {
                 URL.revokeObjectURL(output.src)
             }
         };
 
-        var editPrevTitle = function(event, id) {
+        var editPrevTitle = function (event, id) {
             $('#edit_news_title_' + id).html('');
             $('#edit_news_title_' + id).html(event.target.value);
         }
 
-        var editPrevShort = function(event, id) {
+        var editPrevShort = function (event, id) {
             $('#edit_news_desc_' + id).html('');
             $('#edit_news_desc_' + id).html(event.target.value);
         }
 
-        var addPrevImage = function(event) {
+        var addPrevImage = function (event) {
             var output = document.getElementById('add_news_image');
             output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
+            output.onload = function () {
                 URL.revokeObjectURL(output.src)
             }
         };
 
-        var addPrevTitle = function(event) {
+        var addPrevTitle = function (event) {
             $('#add_news_title').html('');
             $('#add_news_title').html(event.target.value);
         }
 
-        var addPrevShort = function(event) {
+        var addPrevShort = function (event) {
             $('#add_news_desc').html('');
             $('#add_news_desc').html(event.target.value);
         }

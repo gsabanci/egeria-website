@@ -18,14 +18,14 @@
                 @if (!is_null($giris_banner_link->text))
                     <h4
                         class="c-title__heading c-title__heading--font-medium c-title__heading--no-mg c-title__heading--white">
-                        Daha detaylı <a href="{{ $giris_banner_link->text }}" target="_blank"
-                            style="text-decoration: underline !important; color: var(--color-green)">inceleyin</a>
+                        {{ optional($static_texts->get('detay-metin'))->value }} <a href="{{ $giris_banner_link->text }}" target="_blank"
+                            style="text-decoration: underline !important; color: var(--color-green)"> {{ optional($static_texts->get('detay-link'))->value }}</a>
                     </h4>
                 @else
                     <h4
                         class="c-title__heading c-title__heading--font-medium c-title__heading--no-mg c-title__heading--white">
-                        Daha detaylı <a href="#hakkimizda"
-                            style="text-decoration: underline !important; color: var(--color-green)">inceleyin</a>
+                         {{ optional($static_texts->get('detay-metin'))->value }} <a href="#hakkimizda"
+                            style="text-decoration: underline !important; color: var(--color-green)">{{ optional($static_texts->get('detay-link'))->value }}</a>
                     </h4>
                 @endif
             </div>

@@ -49,6 +49,7 @@ class OfficeController extends Controller
         $office->email=$r->email;
         $office->queue=$r->queue;
         $office->is_active=$r->is_active;
+        $office->lang_code=$r->lang_code;
         $office->save();
 
         return redirect()->back();

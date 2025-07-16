@@ -27,6 +27,7 @@
                     <tr class="text-left">
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Kategori Başlığı</th>
+                        <th style="min-width: 20px">Dil Kodu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
                 </thead>
@@ -35,18 +36,21 @@
                         <tr>
                             <td>#{{ $c->id }}</td>
                             <td>
-                                <span
-                                    class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $c->name }}</span>
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $c->name }}</span>
                                 <span class="text-muted font-weight-bold">{{ $c->slug }}</span>
+                            </td>
+                            <td>
+                                <span class="badge badge-light-primary font-weight-bolder">
+                                    {{ strtoupper($c->lang_code) }}
+                                </span>
                             </td>
                             <td class="pr-0 text-right">
                                 <a href="#" data-toggle="modal" data-target="#modal_{{ $c->jc_guid }}"
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Write.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
                                                 <path
@@ -66,9 +70,8 @@
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                     <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Trash.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
                                                 <path
@@ -92,25 +95,26 @@
                                     @csrf
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Kategori Detay</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
+                                            <h5 class="modal-title" id="exampleModalLabel">Kategori Detay
+                                                <span class="text-primary font-weight-bold ml-2" style="font-size:14px;">
+                                                    [{{ strtoupper($c->lang_code) }}]
+                                                </span>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Kategori Adı</label>
-                                                <input type="text" class="form-control" value="{{ $c->name }}"
-                                                    name="name">
+                                                <input type="text" class="form-control" value="{{ $c->name }}" name="name">
                                                 <input type="hidden" name="jc_guid" value="{{ $c->jc_guid }}">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Kapat</button>
-                                            <button type="submit" value="submit"
-                                                class="btn btn-primary">Kaydet</button>
+                                            <button type="submit" value="submit" class="btn btn-primary">Kaydet</button>
                                         </div>
                                     </div>
                                 </form>
@@ -123,8 +127,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Kategori Sil</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -152,8 +155,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">İş Kategorisi Ekle</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -161,6 +163,14 @@
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Kategori Adı</label>
                                             <input type="text" class="form-control" name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lang_code" class="col-form-label">Dil</label>
+                                            <select name="lang_code" class="form-control" required>
+                                                @foreach ($languages as $lang)
+                                                    <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

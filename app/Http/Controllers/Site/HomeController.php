@@ -14,39 +14,47 @@ use App\Models\Reference;
 use App\Models\AboutusCard;
 use App\Mail\NewsletterMail;
 use App\Models\Subscription;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     public function index(Request $r)
     {
+        $lang = App::getLocale();
+
         if ($r->has('office_guid')) {
-            $d['o_guid']=$r->office_guid;
+            $d['o_guid'] = $r->office_guid;
             $d['references'] = Reference::orderBy('queue', 'ASC')->where('is_active', '1')->get();
-            if($r->office_guid != 'all') {
-                $d['staff'] = Staff::where('office_guid',$r->office_guid)->where('is_active', '1')->orderBy('queue', 'ASC')->get();
+            if ($r->office_guid != 'all') {
+                $d['staff'] = Staff::where('office_guid', $r->office_guid)->where('is_active', '1')->orderBy('queue', 'ASC')->get();
             } else {
                 $d['staff'] = Staff::where('is_active', '1')->orderBy('queue', 'ASC')->get();
             }
-            $d['news'] = News::orderBy('queue','asc')->orderBy('created_at', 'DESC')->paginate(12);
-            $d['offices'] = Office::with('city')->where('is_active', 1)->get();
-            $d['aboutus_cards'] = AboutusCard::get();
+            $d['news'] = News::where('lang_code', $lang)->orderBy('queue', 'asc')->orderBy('created_at', 'DESC')->paginate(12);
+            $d['offices'] = Office::with('city')->where('lang_code', $lang)->where('is_active', 1)->get();
+            $d['aboutus_cards'] = AboutusCard::where('lang_code', $lang)->get();
+            $d['languages'] = Language::where('is_active', 1)->get();
             return view('frontend.page.dashboard', $d);
         } else {
-            $d['o_guid']=null;
+            $d['o_guid'] = null;
             $d['references'] = Reference::orderBy('queue', 'ASC')->where('is_active', '1')->get();
             $d['staff'] = Staff::where('is_active', '1')->orderBy('queue', 'ASC')->get();
-            $d['news'] = News::orderBy('queue','asc')->orderBy('created_at', 'DESC')->paginate(12);
-            $d['offices'] = Office::with('city')->where('is_active', 1)->get();
-            $d['aboutus_cards'] = AboutusCard::get();
+            $d['news'] = News::where('lang_code', $lang)->orderBy('queue', 'asc')->orderBy('created_at', 'DESC')->paginate(12);
+            $d['offices'] = Office::with('city')->where('lang_code', $lang)->where('is_active', 1)->get();
+            $d['aboutus_cards'] = AboutusCard::where('lang_code', $lang)->get();
+            $d['languages'] = Language::where('is_active', 1)->get();
             return view('frontend.page.dashboard', $d);
         }
     }
 
     public function faqs()
     {
-        $d['faq']=JobFaq::get();
+        $lang = App::getLocale();
+        
+        $d['faq'] = JobFaq::where('lang_code', $lang)->get();
         $d['page_title'] = 'Sık Sorulan Sorular';
         return view('frontend.page.faqs', $d);
     }
@@ -54,12 +62,12 @@ class HomeController extends Controller
     public function subscription(Request $r)
     {
         $check = Subscription::where("email", $r->email)->first();
-        if(!is_null($check)) {
+        if (!is_null($check)) {
             return redirect()->back()->with('error', 'Girmiş olduğunuz e-posta adresi e-bülten listesinde mevcuttur.');
         }
 
-        $subscription=new Subscription();
-        $subscription->subscription_guid=Str::uuid();
+        $subscription = new Subscription();
+        $subscription->subscription_guid = Str::uuid();
         $subscription->email = $r->email;
         $subscription->save();
 

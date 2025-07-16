@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LanguageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\JobController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\LibraryController;
 use App\Http\Controllers\Admin\LibraryCategoryController;
 use App\Http\Controllers\Admin\NewsCategoryController;
+use App\Http\Controllers\Admin\StaticTextController;
 
 //Auth işlemleri Tema Değiştir
 Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
@@ -33,6 +36,12 @@ Route::post('/themeColorChange', [ThemeController::class, 'themeColorChange'])->
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
+//Kategoriler
+Route::get('/categories', [CategoryController::class, 'home'])->name('admin.categories');
+//KATEGORİ EKLE
+Route::post('/category-add', [CategoryController::class, 'category_add'])->name('admin.category_add');
+Route::post('/category-update/{c_guid}', [CategoryController::class, 'category_update'])->name('admin.category_update');
+Route::post('/category-delete/{c_guid}', [CategoryController::class, 'category_delete'])->name('admin.category_delete');
 //Servisler
 Route::get('/services', [ServiceController::class, 'home'])->name('admin.services');
 //SERVİS EKLE
@@ -130,7 +139,9 @@ Route::post('/reference-delete', [ReferenceController::class, 'reference_delete'
 
 //KARIYER
 Route::get('/career', [CareerController::class, 'home'])->name('admin.career');
+Route::post('/career-add', [CareerController::class, 'career_add'])->name('admin.career_add');
 Route::post('/career-content-update', [CareerController::class, 'career_content_update'])->name('admin.career_content_update');
+Route::post('/career-delete', [CareerController::class, 'career_delete'])->name('admin.career_delete');
 
 //FAQS
 Route::get('/faqs', [FaqController::class, 'faqs'])->name('admin.faqs');
@@ -139,15 +150,15 @@ Route::post('/faq-edit', [FaqController::class, 'faq_update'])->name('admin.faq_
 Route::post('/faq-delete', [FaqController::class, 'faq_delete'])->name('admin.faq_delete');
 
 //ILETISIM
-
 Route::get('/contact', [ContactController::class, 'home'])->name('admin.contact');
 Route::post('/contact-delete', [ContactController::class, 'delete'])->name('admin.delete');
 
 
 //AYARLAR
-
 Route::get('/setting', [SettingController::class, 'home'])->name('admin.setting');
+Route::post('/setting-add', [SettingController::class, 'setting_add'])->name('admin.setting_add');
 Route::post('/setting-update', [SettingController::class, 'update'])->name('admin.setting_update');
+Route::post('/setting-delete', [SettingController::class, 'setting_delete'])->name('admin.setting_delete');
 
 Route::get('/form-settings', [SettingController::class, 'form_settings'])->name('admin.form_settings');
 Route::post('/form-settings', [SettingController::class, 'form_setting_update'])->name('admin.form_setting_update');
@@ -157,7 +168,6 @@ Route::get('/demo-req', [DemoController::class, 'home'])->name('admin.demo_req')
 Route::post('/demo-req-delete', [DemoController::class, 'delete'])->name('admin.demo_req_delete');
 
 //SOZLESMELER
-
 Route::get('/contracts', [SettingController::class, 'contract'])->name('admin.contract');
 Route::post('/contracts', [SettingController::class, 'policy_update'])->name('admin.policy_update');
 
@@ -177,3 +187,15 @@ Route::get('/library-categories', [LibraryCategoryController::class, 'home'])->n
 Route::post('/library-category-add', [LibraryCategoryController::class, 'add'])->name('admin.library_category_add');
 Route::post('/library-category-update', [LibraryCategoryController::class, 'update'])->name('admin.library_category_update');
 Route::post('/library-category-delete', [LibraryCategoryController::class, 'delete'])->name('admin.library_category_delete');
+
+//DİL KATEGORİSİ
+Route::get('/languages', [LanguageController::class, 'home'])->name('admin.languages');
+Route::post('/language-add', [LanguageController::class, 'add'])->name('admin.language_add');
+Route::post('/language-update', [LanguageController::class, 'update'])->name('admin.language_update');
+Route::post('/language-delete', [LanguageController::class, 'delete'])->name('admin.language_delete');
+
+//STATİK METİNLER
+Route::get('/static-texts', [StaticTextController::class, 'home'])->name('admin.static_texts');
+Route::post('/static-text-add', [StaticTextController::class, 'add'])->name('admin.static_text_add');
+Route::post('/static-text-update', [StaticTextController::class, 'update'])->name('admin.static_text_update');
+Route::post('/static-text-delete', [StaticTextController::class, 'delete'])->name('admin.static_text_delete');

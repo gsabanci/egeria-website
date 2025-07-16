@@ -38,8 +38,9 @@ class LaborController extends Controller
     {
         $labor = new Labor();
         $labor->labor_guid = Str::uuid();
+        $labor->lang_code = $r->lang_code;
         $labor->title = $r->title;
-        $labor->slug = Str::slug($r->title);
+        $labor->slug = $r->slug;
         $labor->content = $r->content;
         $labor->queue = $r->queue;
         $labor->status = $r->status;
@@ -54,7 +55,7 @@ class LaborController extends Controller
         $labor = Labor::where("labor_guid",$r->labor_guid)->first();
         $labor->labor_guid = Str::uuid();
         $labor->title = $r->title;
-        $labor->slug = Str::slug($r->title);
+        $labor->slug = $r->slug;
         $labor->content = $r->content;
         $labor->queue = $r->queue;
         $labor->status = $r->status;

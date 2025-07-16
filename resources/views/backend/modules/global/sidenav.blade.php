@@ -43,6 +43,12 @@
                         <span class="menu-text">Dashboard</span>
                     </a>
                 </li>
+                 <li class="menu-item" aria-haspopup="true">
+                    <a href="{{ route('admin.categories') }}" class="menu-link">
+                        <i class="menu-icon flaticon2-layers-1"></i>
+                        <span class="menu-text">Kategoriler</span>
+                    </a>
+                </li>
                 <li class="menu-item" aria-haspopup="true">
                     <a href="{{ route('admin.services') }}" class="menu-link">
                         <i class="menu-icon flaticon2-layers-1"></i>
@@ -144,6 +150,12 @@
                         <span class="menu-text">Site İçerikleri</span>
                     </a>
                 </li>
+                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="{{ route('admin.static_texts') }}" class="menu-link menu-toggle">
+                        <i class="menu-icon flaticon2-pen"></i>
+                        <span class="menu-text">Statik Metinler</span>
+                    </a>
+                </li>
                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="{{ route('admin.contract') }}" class="menu-link menu-toggle">
                         <i class="menu-icon 
@@ -187,6 +199,12 @@
                         <span class="menu-text">Kütüphane</span>
                     </a>
                 </li>
+                <li class="menu-item" aria-haspopup="true">
+                    <a href="{{ route('admin.languages') }}" class="menu-link">
+                        <i class="menu-icon flaticon2-settings"></i>
+                        <span class="menu-text">Diller</span>
+                    </a>
+                </li>""
             </ul>
             <!--end::Menu Nav-->
         </div>

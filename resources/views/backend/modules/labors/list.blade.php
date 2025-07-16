@@ -29,6 +29,7 @@
                     <tr class="text-left">
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Hizmet Adı</th>
+                        <th style="min-width: 200px">Dil Kodu</th>
                         <th style="min-width: 50">Görüntülenme Sırası</th>
                         <th style="min-width: 120px">Durumu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
@@ -41,7 +42,9 @@
                             <td>
                                 <span
                                     class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $labor->title }}</span>
+                                    <span class="text-muted font-weight-bold">{{ $labor->slug }}</span>
                             </td>
+                            <td class="font-weight-bolder">{{ strtoupper($labor->lang_code) }}</td>
                             <td>{{ !is_null($labor->queue) ? $labor->queue : 'Belirlenmemiş' }}</td>
                             <td>
                                 @if ($labor->status == '1')
@@ -100,7 +103,11 @@
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Hizmet Düzenle</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Hizmet Düzenle
+                                              <span class="text-primary font-weight-bold ml-2" style="font-size:14px;">
+                                                [{{ strtoupper($labor->lang_code) }}]
+                                             </span>
+                                        </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -192,6 +199,18 @@
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Hizmet Adı</label>
                                             <input type="text" class="form-control" name="title" required>
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="slug" class="col-form-label">Tanımlayıcı(Slug)</label>
+                                            <input type="text" class="form-control" name="slug" required>
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="lang_code" class="col-form-label">Dil</label>
+                                            <select name="lang_code" class="form-control" required>
+                                                @foreach ($languages as $lang)
+                                                    <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">İçerik</label>

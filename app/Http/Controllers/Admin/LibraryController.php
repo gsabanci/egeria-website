@@ -21,7 +21,7 @@ class LibraryController extends Controller
      */
     public function home()
     {
-        $d['library_categories'] = LibraryCategory::get();
+        $d['library_categories'] = LibraryCategory::where('lang_code', 'tr')->get();
         $d['libraries'] = Library::with("category")->paginate(10);
         $d['theme'] = Theme::where('id', 1)->first();
         $d['library_count'] = Library::count();
@@ -47,10 +47,11 @@ class LibraryController extends Controller
         $lib->library_guid = Str::uuid();
         $lib->title = $r->title;
         $lib->slug = Str::slug($r->title);
-        $lib->library_category_guid = $r->library_category_guid;
+        $lib->library_category_slug = $r->library_category_slug;
         $lib->short_desc = $r->short_desc;
         $lib->long_desc = $r->long_desc;
         $lib->is_active = $r->is_active;
+        $lib->lang_code = $r->lang_code;
         $lib->order = $r->order;
 
         $coverimg = $r->file('image')->getClientOriginalName();

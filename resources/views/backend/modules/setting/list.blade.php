@@ -26,7 +26,7 @@
                     <tr class="text-left">
                         <th style="max-width: 30px">ID</th>
                         <th style="min-width: 200px">Ayar Adı</th>
-
+                        <th style="min-width: 20px">Dil Kodu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
                 </thead>
@@ -38,6 +38,11 @@
                                 <span
                                     class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $s->title }}</span>
                                 <span class="text-muted font-weight-bold">{{ $s->slug }}</span>
+                            </td>
+                             <td>
+                                <span class="badge badge-light-primary font-weight-bolder">
+                                    {{ strtoupper($s->lang_code) }}
+                                </span>
                             </td>
                             <td class="pr-0 text-right">
                                 <a href="#" data-toggle="modal" data-target="#modal_{{ $s->setting_guid }}"
@@ -69,7 +74,11 @@
                             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">{{ $s->title }} Düzenle</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ $s->title }} Düzenle
+                                             <span class="text-primary font-weight-bold ml-2" style="font-size:14px;">
+                                                [{{ strtoupper($s->lang_code) }}]
+                                             </span>
+                                        </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -82,7 +91,7 @@
                                                 <div class="form-group col-6">
                                                     <label for="recipient-name" class="col-form-label">Başlık</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ $s->title }}" name="title" disabled>
+                                                        value="{{ $s->title }}" name="title">
                                                     <input type="hidden" name="setting_guid"
                                                         value="{{ $s->setting_guid }}">
                                                 </div>
@@ -108,7 +117,7 @@
                                                 </div>
                                             </div>
                                             @if ($s->slug === 'hakkimizda')
-                                                @foreach ($aboutus_cards as $ac)
+                                                @foreach ($aboutus_cards->where('lang_code', $s->lang_code) as $ac)
                                                     <input type="hidden" name="ac_guid[]" value="{{ $ac->ac_guid }}">
                                                     <div class="row">
                                                         <div class="form-group col-6">
@@ -146,17 +155,57 @@
                         </div>
                     @endforeach
 
+                     <div class="modal fade" id="{{ $data['button']['id'] }}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="{{ route('admin.setting_add') }}" method="POST">
+                            @csrf
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">İçerik Ekle</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="slug" class="col-form-label">Tanımlayıcı(Slug)</label>
+                                            <input type="text" class="form-control" id="slug" name="slug" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="title" class="col-form-label">İçerik Adı</label>
+                                            <input type="text" class="form-control" name="title" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lang_code" class="col-form-label">Dil</label>
+                                            <select name="lang_code" class="form-control" required>
+                                                @foreach ($languages as $lang)
+                                                    <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Kapat</button>
+                                        <button type="submit" value="submit" class="btn btn-primary">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                 </tbody>
             </table>
         </div>
         <!--end::Table-->
     </div>
     <!--end::Body-->
-    {{-- @if ($staffs->lastPage() > 1)
+    @if ($settings->lastPage() > 1)
     <div class="card-footer">
-        {{ $staffs->links('backend.modules.global.paginator', ['paginator' => $staffs]) }}
+        {{ $settings->links('backend.modules.global.paginator', ['paginator' => $settings]) }}
     </div>
-    @endif --}}
+    @endif
 </div>
 
 @section('js')

@@ -6,7 +6,7 @@
                 <svg class="c-icon__svg c-icon--sm">
                     <use xlink:href="{{ asset('frontend/assets/images/sprite.svg#close') }}"></use>
                 </svg>
-                <span>Kapat</span>
+                <span>{{ optional($static_texts->get('kapat'))->value }}</span>
             </div>
         </div>
         <div class="modal-body c-modal__body">
@@ -15,7 +15,7 @@
                     <div id="recap">
                         <div class="c-title">
                             <h4 class="c-title__heading c-title__heading--medium">
-                                Demo Talep Et
+                               {{ optional($static_texts->get('demo-talep-et'))->value }}
                             </h4>
                         </div>
                         <div class="alert alert-success" role="alert" v-if="hasAlert && alertType == 'success'">
@@ -26,25 +26,25 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="c-input__label" for="inputName">İsim</label>
+                                <label class="c-input__label" for="inputName">{{ optional($static_texts->get('isim'))->value }}</label>
                                 <input type="text" class="form-control c-input" name="name" id="inputName" @keyup="setName($event)" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="c-input__label" for="inputLastname">Soyisim</label>
+                                <label class="c-input__label" for="inputLastname">{{ optional($static_texts->get('soyisim'))->value }}</label>
                                 <input type="text" class="form-control c-input" name="surname" id="inputLastname" @keyup="setSurname($event)" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="c-input__label" for="inputPhone">Telefon</label>
+                            <label class="c-input__label" for="inputPhone">{{ optional($static_texts->get('telefon'))->value }}</label>
                             <input type="tel" class="form-control c-input phone" maxlength="19" name="phone" @keyup="setPhone($event)" required>
                         </div>
                         <div class="form-group">
-                            <label class="c-input__label" for="inputEmail">Eposta</label>
+                            <label class="c-input__label" for="inputEmail">{{ optional($static_texts->get('e-posta'))->value }}</label>
                             <input type="email" class="form-control c-input" id="inputEmail" name="email" @keyup="setMail($event)" required>
                         </div>
     
                         <div class="form-group">
-                            <label class="c-input__label" for="inputMsg">Mesaj</label>
+                            <label class="c-input__label" for="inputMsg">{{ optional($static_texts->get('mesaj'))->value }}</label>
                             <textarea type="tel" class="form-control c-input c-input--textarea" id="inputMsg" name="msg" @keyup="setMsg($event)" required></textarea>
                         </div>
                        
@@ -61,7 +61,7 @@
                             <div class="g-recaptcha mbl" data-expired-callback="demoCaptchaCallback" data-callback="demoCaptchaCallback" id="demoReq"></div>
                         </div>
                         <button type="button" id="sendFormC" class="c-button c-button--elevate-primary c-button--sm-w c-button--sm demoReqButton" @click="submitRequestForm()">
-                                Formu Gönder
+                               {{ optional($static_texts->get('formu-gonder'))->value }}
                             </button>
                     </div>
                  </div>

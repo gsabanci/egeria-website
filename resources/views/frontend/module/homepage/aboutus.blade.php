@@ -1,13 +1,17 @@
 <!-- about us section -->
 <div id="hakkimizda" class="c-section c-section--md-top">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-6">
-                <img class="c-img c-img--rounded c-img--fit lazyload"
-                    data-src="{{ asset('/storage/setting_images/' . $aboutus->image) }}" alt="Egeria">
+        <div class="row d-flex align-items-stretch">
+
+            <div class="col-12 col-lg-6 p-0 d-flex" style="
+          background-image: url('{{ asset('/storage/setting_images/' . $aboutus->image) }}');
+          background-size: cover;
+          background-position: center;
+          border-radius: 0.4rem;
+        ">
             </div>
-            <div class="col-md-12 col-lg-6 u-pd-t-30">
-                <div class="c-title">
+            <div class="col-12 col-lg-6 d-flex flex-column">
+                <div class="flex-fill u-pd-t-30 pl-lg-2">
                     <h3 class="c-title__heading">{{ $aboutus->title }}</h3>
                     <p class="c-title__desc u-pd-lg-r-20 u-pd-xl-r-120">
                         {!! $aboutus->text !!}
@@ -54,8 +58,7 @@
                                     </div>
                                     <div class="c-iconCard__content-action">
                                         <a href="{{ !is_null($ac->link) ? $ac->link : 'javascript:;' }}"
-                                            class="c-button c-button--elevate-purple c-button--xs c-button--xs-w">Daha
-                                            fazlasını gör</a>
+                                            class="c-button c-button--elevate-purple c-button--xs c-button--xs-w">{{ optional($static_texts->get('daha-fazla-metin'))->value }}</a>
                                     </div>
                                 </div>
                             </div>

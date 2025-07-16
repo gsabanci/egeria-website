@@ -131,9 +131,8 @@
 															z-index: 99;"
                                                 href="{{ route('industry_detail', ['slug' => $i->slug]) }}">
                                                 <a class="c-button c-button--transparent"
-                                                    href="{{ route('industry_detail', ['slug' => $i->slug]) }}">Daha
-                                                    fazla
-                                                    bilgi alın</a>
+                                                    href="{{ route('industry_detail', ['slug' => $i->slug]) }}">
+                                                {{ optional($static_texts->get('daha-fazla-metin'))->value }}</a>
                                             </div>
                                         </div>
                                     </div>

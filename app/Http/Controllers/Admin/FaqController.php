@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CareerPage;
 use App\Models\JobFaq;
 use App\Models\Theme;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Str;
 
@@ -20,7 +21,8 @@ class FaqController extends Controller
     {
         $d['career_content']=CareerPage::first();
         $d['theme'] = Theme::where('id', 1)->first();
-        $d['sss']=JobFaq::get();
+        $d['sss']=JobFaq::orderBy('queue', 'ASC')->paginate(10);
+        $d['languages'] = Language::where('is_active', 1)->get();
         $d['data'] = array(
             'button' => array(
 
@@ -40,6 +42,8 @@ class FaqController extends Controller
         $sss->faq_guid=Str::uuid();
         $sss->title=$r->title;
         $sss->description=$r->description;
+        $sss->lang_code=$r->lang_code;
+        $sss->queue=$r->queue;
         $sss->save();
         return redirect()->back()->with('success','SSS başarıyla eklendi.');
     }
@@ -49,6 +53,7 @@ class FaqController extends Controller
         $faq = JobFaq::where('faq_guid',$r->faq_guid)->first();
         $faq->title = $r->title;
         $faq->description = $r->description;
+        $faq->queue = $r->queue;
         $faq->update();
 
         return redirect()->back()->with('success','SSS başarıyla güncellendi.');

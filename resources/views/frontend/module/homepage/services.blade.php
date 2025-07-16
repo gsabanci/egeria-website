@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="c-service-card__link" style="position: relative;
                                     z-index: 99;" href="{{ route('industry_detail',['slug'=>$i->slug]) }}">
-                                        <a class="c-button c-button--transparent" href="{{ route('industry_detail',['slug'=>$i->slug]) }}">Daha fazla bilgi alın</a>
+                                        <a class="c-button c-button--transparent" href="{{ route('industry_detail',['slug'=>$i->slug]) }}">{{ optional($static_texts->get('bilgi-metni'))->value }}</a>
 
                                     </div>
                                 </div>

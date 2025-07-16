@@ -11,7 +11,7 @@
             </div>
             <ul class="c-mobile-menu__list--main c-mobile-menu__list">
                 <li class="c-mobile-menu__list-item">
-                    <span>Çözümler</span>
+                    <span>{{ optional($static_texts->get('cozumler'))->value }}</span>
                     <ul class="c-mobile-menu__list-item-sub">
                         @foreach ($all_services as $s)
                             <a href="{{ route('service_detail', ['slug' => $s->slug]) }}">
