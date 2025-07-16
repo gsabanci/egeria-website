@@ -21,7 +21,7 @@
                     </ul>
                 </li>
                 <li class="c-mobile-menu__list-item">
-                    <span>Sektörler</span>
+                    <span>{{ optional($static_texts->get('sektorler'))->value }}</span>
                     <ul class="c-mobile-menu__list-item-sub">
                         @foreach ($all_industries as $industry)
                             <a href="{{ route('industry_detail', ['slug' => $industry->slug]) }}">
@@ -33,9 +33,9 @@
                     </ul>
                 </li>
                 <li class="c-mobile-menu__list-item">
-                    <span>Haberler</span>
+                    <span>{{ $menuCategories['haberler'] }}</span>
                     <ul class="c-mobile-menu__list-item-sub">
-                        <a href="{{ route('news') }}">Tüm Haberler</a>
+                        <!-- <a href="{{ route('news') }}">Tüm Haberler</a> -->
                         @foreach ($all_news_categories as $nc)
                             <a href="{{ route('news_category', ['slug' => $nc->slug]) }}">
                                 <li>{{ $nc->name }}</li>
@@ -47,11 +47,11 @@
                 </li>
                 <li class="c-mobile-menu__list-item">
                     <a href="{{ route('references') }}">
-                        <span>Müşteriler</span>
+                        <span>{{ $menuCategories['musteriler'] }}</span>
                     </a>
                 </li>
                 <li class="c-mobile-menu__list-item">
-                    <span>Kariyer</span>
+                    <span>{{ $menuCategories['kariyer'] }}</span>
                     <ul class="c-mobile-menu__list-item-sub">
                         @foreach ($all_job_categories as $jc)
                             <a href="{{ route('filter', ['slug' => $jc->slug]) }}">
@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="c-mobile-menu__list-item">
-                    <span>Kütüphane</span>
+                    <span>{{ $menuCategories['kutuphane'] }}</span>
                     <ul class="c-mobile-menu__list-item-sub">
                         @foreach ($all_lib_cats as $lc)
                             <a href="{{ route('lib_category', ['slug' => $lc->slug]) }}">
@@ -72,7 +72,7 @@
                 </li>
                 <li class="c-mobile-menu__list-item">
                     <a href="{{ route('contact') }}">
-                        <span>Bize Ulaşın</span>
+                        <span>{{ $menuCategories['bize-ulasin'] }}</span>
                     </a>
                 </li>
                 <li class="c-mobile-menu__list-item">
