@@ -28,6 +28,7 @@
                     <tr class="text-left">
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Kategori Başlığı</th>
+                        <th style="min-width: 50px">Dil Kodu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
                 </thead>
@@ -39,6 +40,11 @@
                                 <span
                                     class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $c->title }}</span>
                                 <span class="text-muted font-weight-bold">{{ $c->slug }}</span>
+                            </td>
+                             <td>
+                                <span class="badge badge-light-primary font-weight-bolder">
+                                    {{ strtoupper($c->lang_code) }}
+                                </span>
                             </td>
                             <td class="pr-0 text-right">
                                 <a href="#" data-toggle="modal"
@@ -171,6 +177,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                         <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Tanımlayıcı(Slug)</label>
+                                            <input type="text" class="form-control" name="slug" required>
+                                        </div>
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Kategori Adı</label>
                                             <input type="text" class="form-control" name="title" required>
@@ -179,6 +189,14 @@
                                             <label for="order" class="col-form-label">Görüntülenme Sırası</label>
                                             <input type="number" class="form-control" name="order" min="0"
                                                 max="10000" step="1">
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="lang_code" class="col-form-label">Dil</label>
+                                            <select name="lang_code" class="form-control" required>
+                                                @foreach ($languages as $lang)
+                                                    <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\industry;
 use App\Models\IndustryContent;
 use App\Models\Theme;
+use App\Models\Language;
 Use Str;
 
 class industryController extends Controller
@@ -30,19 +31,22 @@ class industryController extends Controller
             'records' => $d['industries_count'],
             'has_search' => null
         );
+
+        $d['languages'] = Language::where('is_active', 1)->get();
         
         return view('backend.pages.industry',$d);
     }
     public function industry_add(Request $r)
     {
-        $check=industry::where('name',$r->name)->first();
+        $check=industry::where('name',$r->name)->where('lang_code', $r->lang_code)->first();
         if (!is_null($check)) {
-        return redirect()->back()->with('error','Girdiğiniz isimde servisiniz bulunmaktadır.');
+        return redirect()->back()->with('error','Girdiğiniz isimde endüstri bulunmaktadır.');
         }
         $industry=new industry();
         $industry->industry_guid=Str::uuid();
         $industry->name=$r->name;
         $industry->slug=Str::slug($r->name);
+        $industry->lang_code = $r->lang_code;
         $industry->queue=$r->queue;
         $industry->save();
         
@@ -81,6 +85,9 @@ class industryController extends Controller
             'records' => null,
             'has_search' => true
         );
+
+        $d['languages'] = Language::where('is_active', 1)->get();
+
        return view('backend.pages.industry_detail',$d);
     }
     public function industry_detail_update(Request $r)

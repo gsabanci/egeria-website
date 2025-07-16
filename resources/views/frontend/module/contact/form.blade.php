@@ -2,7 +2,7 @@
     @csrf
     <div class="c-title">
         <h3 class="c-title__heading c-title__heading--medium">
-            İletişim Formu
+            {{ optional($static_texts->get('iletisim-formu'))->value }}
         </h3>
 
         @if ($errors->any())
@@ -21,45 +21,40 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6 mb-0">
-            <label class="c-input__label" for="inputName">İsim</label>
+            <label class="c-input__label" for="inputName">{{ optional($static_texts->get('isim'))->value }}</label>
             <input type="text" class="form-control c-input" name="name" id="inputName" required>
         </div>
         <div class="form-group col-md-6 mb-0">
-            <label class="c-input__label" for="inputLastname">Soyisim</label>
+            <label class="c-input__label" for="inputLastname">{{ optional($static_texts->get('soyisim'))->value }}</label>
             <input type="text" class="form-control c-input" name="surname" id="inputLastname" required>
         </div>
     </div>
     <div class="form-group mb-0">
-        <label class="c-input__label" for="inputPhone">Telefon</label>
+        <label class="c-input__label" for="inputPhone">{{ optional($static_texts->get('telefon'))->value }}</label>
         <input type="tel" class="form-control c-input phone" maxlength="19" name="phone" required>
     </div>
     <div class="form-group mb-0">
-        <label class="c-input__label" for="inputEmail">Eposta</label>
+        <label class="c-input__label" for="inputEmail">{{ optional($static_texts->get('e-posta'))->value }}</label>
         <input type="email" class="form-control c-input" id="inputEmail" name="email" required>
     </div>
     <div class="form-row">
         <div class="form-group mb-0 col-md-12">
-            <label class="c-input__label" for="inputCompany">Şirketinizin Adı</label>
+            <label class="c-input__label" for="inputCompany">{{ optional($static_texts->get('sirket'))->value }}</label>
             <input type="text" class="form-control c-input" id="inputCompany" name="company_name">
         </div>
     </div>
     <div class="form-group mb-0">
-        <label class="c-input__label" for="inputMsg">Mesaj</label>
+        <label class="c-input__label" for="inputMsg">{{ optional($static_texts->get('mesaj'))->value }}</label>
         <textarea type="tel" class="form-control c-input c-input--textarea" id="inputMsg" name="msg" required></textarea>
     </div>
     <div class="form-group mb-0 u-mg-y-20">
         <input type="checkbox" class="c-checkbox" onclick="check()" id="inputChck" checked required>
         <label class="c-input__label" for="inputChck">
+            <!-- <span style="cursor: pointer; text-decoration: underline" data-toggle="modal"
+                data-target="#gizlilik-sozlesmesi-modal">Gizlilik Sözleşmesini</span> ve -->
             <span style="cursor: pointer; text-decoration: underline" data-toggle="modal"
-                data-target="#gizlilik-sozlesmesi-modal">Gizlilik Sözleşmesini</span> ve
-            <span style="cursor: pointer; text-decoration: underline" data-toggle="modal"
-                data-target="#kvkk-aydinlatma-metni-modal">KVKK Aydınlatma Metnini</span>
-            ve iletişim formu sürecine ilişkin aydınlatma metnini okudum kabul ediyorum.
-            Egeria’nın
-            sunacağı fırsat ve avantajlardan haberdar olmak amacıyla, paylaştığım iletişim
-            bilgilerinin (e-mail adresi ve telefon) pazarlama iletişimi amaçlı kullanılmasına
-            onay
-            veriyorum.(*)
+                data-target="#kvkk-aydinlatma-metni-modal">{{ $gizlilik_onayi->text }}</span>
+           
         </label>
         <!-- >Gizlilik Sözleşmesi</a> -->
     </div>
@@ -69,7 +64,7 @@
     </div>
     <button type="button" id="sendForm"
         class="c-button c-button--elevate-primary c-button--sm-w c-button--sm contactButton">
-        Formu Gönder
+        {{ optional($static_texts->get('formu-gonder'))->value }}
     </button>
 </form>
 

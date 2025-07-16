@@ -12,46 +12,55 @@ use App\Models\JobApply;
 use App\Models\CareerPage;
 use App\Models\JobCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Models\SystemSetting;
+use App\Models\Language;
 use App\Http\Controllers\Controller;
 
 class CareerController extends Controller
 {
     public function home()
-    {   
-        $d['jc_guid']=null;
-        $d['job_categories']=JobCategory::get();
-        $d['jobs']=Job::with('offices.office')->get();
+    {
+        $lang = App::getLocale();
+
+        $d['jc_guid'] = null;
+        $d['job_categories'] = JobCategory::where('lang_code', $lang)->get();
+        $d['jobs'] = Job::where('lang_code', $lang)->with('offices.office')->get();
         $d['office_count'] = Office::count();
-        $d['faq']=JobFaq::get();
+        $d['languages'] = Language::where('is_active', 1)->get();
+        $d['faq'] = JobFaq::where('lang_code', $lang)->get();
         $d['page_title'] = 'Kariyer';
         $d['shortlink_title'] = 'Kariyer';
-        $d['title'] = CareerPage::first()->title;
-        $d['subtitle'] = CareerPage::first()->subtitle;
+        $d['title'] = CareerPage::where('lang_code', $lang)->first()->title;
+        $d['subtitle'] = CareerPage::where('lang_code', $lang)->first()->subtitle;
         return view('frontend.page.career', $d);
     }
-   
+
     public function filter($slug)
-    {   $guid=JobCategory::where('slug',$slug)->first();
-        $d['job_categories']=JobCategory::get();
-        $d['jobs']=Job::where('jc_guid',$guid->jc_guid)->with('office')->get();
-        $d['faq']=JobFaq::get();
-        $d['jc_guid']=$guid->jc_guid;
+    {
+        $lang = App::getLocale();
+
+        $guid = JobCategory::where('slug', $slug)->first();
+        $d['job_categories'] = JobCategory::where('lang_code', $lang)->get();
+        $d['jobs'] = Job::where('lang_code', $lang)
+            ->where('jc_guid', $guid->jc_guid)->with('office')->get();
+        $d['faq'] = JobFaq::where('lang_code', $lang)->get();
+        $d['jc_guid'] = $guid->jc_guid;
         $d['office_count'] = Office::count();
         $d['page_title'] = 'Kariyer';
         $d['shortlink_title'] = 'Kariyer';
-        $d['title'] = CareerPage::first()->title;
-        $d['subtitle'] = CareerPage::first()->subtitle;
+        $d['title'] = CareerPage::where('lang_code', $lang)->first()->title;
+        $d['subtitle'] = CareerPage::where('lang_code', $lang)->first()->subtitle;
         return view('frontend.page.career', $d);
     }
-    
+
     public function detail($slug)
     {
-        $d['job_detail']=Job::Where('slug',$slug)->first();
-        $d['page_title'] = $d['job_detail']->title.' Başvuru Formu';
+        $d['job_detail'] = Job::Where('slug', $slug)->first();
+        $d['page_title'] = $d['job_detail']->title . ' Başvuru Formu';
         $d['shortlink_title'] = $d['job_detail']->title . ' Başvuru Formu';
 
-        return view('frontend.page.job_apply',$d);
+        return view('frontend.page.job_apply', $d);
     }
 
     public function job_apply(Request $r)
@@ -65,21 +74,21 @@ class CareerController extends Controller
             'g-recaptcha-response' => 'recaptcha',
         ]);
 
-        $apply=new JobApply();
-        $apply->ja_guid=Str::uuid();
+        $apply = new JobApply();
+        $apply->ja_guid = Str::uuid();
         $apply->job_guid = $r->job_guid;
-        $apply->name=$r->name;
-        $apply->surname=$r->surname;
-        $apply->fullname=$r->name.' '.$r->surname;
-        $apply->phone=$r->phone;
-        $apply->email=$r->email;
-        $apply->readed='0';
-       
-        $file=$r->file('cv');
-        $filename=$file->getClientOriginalName();
-        $file->move(storage_path('app/public/cv/'),$filename);
-        $apply->cv=$filename;
-        
+        $apply->name = $r->name;
+        $apply->surname = $r->surname;
+        $apply->fullname = $r->name . ' ' . $r->surname;
+        $apply->phone = $r->phone;
+        $apply->email = $r->email;
+        $apply->readed = '0';
+
+        $file = $r->file('cv');
+        $filename = $file->getClientOriginalName();
+        $file->move(storage_path('app/public/cv/'), $filename);
+        $apply->cv = $filename;
+
         $apply->save();
 
         try {
@@ -101,6 +110,6 @@ class CareerController extends Controller
             //throw $th;
         }
 
-        return redirect()->back()->with('success','İş başvurunuz başarıyla alınmıştır.');
+        return redirect()->back()->with('success', 'İş başvurunuz başarıyla alınmıştır.');
     }
 }

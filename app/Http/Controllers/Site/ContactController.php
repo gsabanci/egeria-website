@@ -11,6 +11,7 @@ use App\Models\Contact;
 use App\Models\DemoReq;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Models\SystemSetting;
 use App\Http\Controllers\Controller;
 
@@ -18,8 +19,9 @@ class ContactController extends Controller
 {
     public function home()
     {
-        $d['offices']=Office::with('city')->where('is_active',1)->get();
-       
+        $lang = App::getLocale();
+
+        $d['offices']=Office::with('city')->where('lang_code', $lang)->where('is_active',1)->get();
         $d['page_title'] = 'İletişim';
         $d['shortlink_title'] = 'İletişim';
         return view('frontend.page.contact', $d);

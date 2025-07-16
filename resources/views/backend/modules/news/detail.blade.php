@@ -13,7 +13,9 @@
     <input type="hidden" name="news_guid" value="{{ $news->news_guid }}">
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
-            <span class="card-label font-weight-bolder text-dark">{{ $news->title }} Detay</span>
+            <span class="card-label font-weight-bolder text-dark">{{ $news->title }} Detay
+                 <span class="text-primary font-weight-bold ml-2" style="font-size: 14px;">[{{ strtoupper($news->lang_code) }}]</span>
+            </span>
             <span class="text-muted mt-3 font-weight-bold font-size-sm">Aşağıda sistemde yer alan {{ $news->title }}
                 adlı
                 haber detayını görebilirsiniz.</span>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\NewsCategory;
 use App\Models\Theme;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Str;
 
@@ -30,7 +31,8 @@ class NewsController extends Controller
             'records' => $d['news_count'],
             'has_search' => null
         );
-        $d['categories'] = NewsCategory::get();
+        $d['categories'] = NewsCategory::where('lang_code', 'tr')->get();
+        $d['languages'] = Language::where('is_active', 1)->get();
 
         return view('backend.pages.news',$d);
     }
@@ -54,6 +56,7 @@ class NewsController extends Controller
         $news->news_guid=Str::uuid();
         $news->title=$r->title;
         $news->slug=Str::slug($r->title);
+        $news->lang_code = $r->lang_code;
         $news->short_desc=$r->short_desc;
         $news->detail=$r->detail;
         $news->nc_guid = $r->nc_guid;

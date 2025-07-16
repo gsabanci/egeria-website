@@ -39,7 +39,8 @@ class LibraryCategoryController extends Controller
         $category = new LibraryCategory();
         $category->library_category_guid = Str::uuid();
         $category->title = $r->title;
-        $category->slug = Str::slug($r->title);
+        $category->lang_code = $r->lang_code;
+        $category->slug = $r->slug;
         $category->order = !is_null($r->order) ? $r->order : $allCatCount + 1;
         $category->save();
 

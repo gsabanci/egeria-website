@@ -4,16 +4,16 @@
         <div class="col-md-6 offset-md-3">
             <div class="c-newsletter">
                 <div class="c-newsletter__title">
-                    E-bültene kayıt ol!
+                    {{ optional($static_texts->get('e-bulten'))->value }}
                 </div>
                 <form action="{{ route('subscription') }}" method="POST" class="c-newsletter__form">
                     @csrf
                     <div class="c-newsletter__form-inputs">
                         <input class="c-input c-input--lg-w" name="email" type="email"
-                            placeholder="E-posta adresinizi giriniz">
+                            placeholder={{ optional($static_texts->get('e-posta'))->value }}>
                         <div>
                             <button class="c-button c-button--white c-button--only-icon"
-                                aria-label="E-bültene kayıt ol">
+                                aria-label={{ optional($static_texts->get('e-bulten'))->value }}>
                                 <svg class="c-icon__svg c-icon--xs">
                                     <use xlink:href="{{ asset('frontend/assets/images/sprite.svg#chevron-right') }}">
                                     </use>
@@ -45,7 +45,7 @@
         <div class="c-footer__row">
             <div class="c-footer__col">
                 <div class="c-footer__title">
-                    Çözümler
+                    {{ optional($static_texts->get('cozumler'))->value }}
                 </div>
                 <ul class="c-footer__list">
                     @foreach ($all_services as $srvc)
@@ -59,7 +59,7 @@
             </div>
             <div class="c-footer__col">
                 <div class="c-footer__title">
-                    Sektörler
+                    {{ optional($static_texts->get('sektorler'))->value }}
                 </div>
                 <ul class="c-footer__list">
                     @foreach ($all_industries as $industry)
@@ -73,7 +73,7 @@
             </div>
             <div class="c-footer__col">
                 <div class="c-footer__title">
-                    Hizmetler
+                    {{ optional($static_texts->get('hizmetler'))->value }}
                 </div>
                 <ul class="c-footer__list">
                     @foreach ($labors as $l)
@@ -85,7 +85,7 @@
                     @endforeach
                     <li class="c-footer__list-item">
                         <a href="{{ route('faqs') }}">
-                            SSS
+                           {{ optional($static_texts->get('sss'))->value }}
                         </a>
                     </li>
                 </ul>

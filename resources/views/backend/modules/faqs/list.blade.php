@@ -28,6 +28,8 @@
                 <tr class="text-left">
                     <th style="max-width: 10px">ID</th>
                     <th style="min-width: 200px">SSS Başlık</th>
+                    <th style="min-width: 200px">Dil Kodu</th>
+                    <th style="min-width: 200px">Görüntülenme Sırası</th>
                     <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                 </tr>
             </thead>
@@ -40,8 +42,12 @@
                                 class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $s->title }}</span>
                             <span class="text-muted font-weight-bold"></span>
                         </td>
-
-
+                          <td>
+                                <span class="badge badge-light-primary font-weight-bolder">
+                                    {{ strtoupper($s->lang_code) }}
+                                </span>
+                            </td>
+                         <td>{{ !is_null($s->queue) ? $s->queue : 'Belirlenmemiş' }}</td>
                         <td class="pr-0 text-right">
                             <a href="#" data-toggle="modal" data-target="#edit_{{ $s->faq_guid }}"
                                 class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
@@ -134,6 +140,12 @@
                                             <label for="recipient-name" class="col-form-label">Açıklama</label>
                                             <textarea class="form-control summernote" name="description" required>{!! $s->description !!}</textarea>
                                         </div>
+                                         <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Görüntülenme
+                                                    Sırası</label>
+                                                <input type="text" class="form-control" value="{{ $s->queue }}"
+                                                    name="queue">
+                                            </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -165,9 +177,22 @@
 
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Açıklama</label>
-                                        <input type="text" class="form-control summernote" name="description"
-                                            required>
+                                        <textarea type="text" class="form-control summernote" name="description"
+                                            required></textarea>
                                     </div>
+                                      <div class="form-group">
+                                            <label for="lang_code" class="col-form-label">Dil</label>
+                                            <select name="lang_code" class="form-control" required>
+                                                @foreach ($languages as $lang)
+                                                    <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                     <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Görüntülenme
+                                                Sırası</label>
+                                            <input type="text" class="form-control" name="queue">
+                                        </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -181,9 +206,6 @@
             </tbody>
         </table>
     </div>
-</div>
-</div>
-
 </div>
 @section('js')
     <script>

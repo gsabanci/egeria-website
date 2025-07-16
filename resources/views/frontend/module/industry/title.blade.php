@@ -8,7 +8,7 @@
                         <a href="/">Egeria</a> <span>/</span>
                     </div>  
                     <div class="c-breadcrumb__item">
-                        Sektörler <span>/</span> 
+                        {{ optional($static_texts->get('sektorler'))->value }} <span>/</span> 
                     </div>  
                     <div class="c-breadcrumb__item c-breadcrumb__item--last">
                         {{ $industry_detail->name }}

@@ -29,6 +29,7 @@
                         <th style="max-width: 30px">ID</th>
                         <th style="min-width: 200px">Döküman Adı</th>
                         <th style="min-width: 50px">Kategorisi</th>
+                        <th style="min-width: 50px">Dil Kodu</th>
                         <th style="min-width: 50px">Durumu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
@@ -40,9 +41,11 @@
                             <td>
                                 <span
                                     class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $lib->title }}</span>
-                                <span
+                            </td>
+                            <td> <span
                                     class="text-muted font-weight-bold">{{ $lib->category != null ? $lib->category->title : '-' }}</span>
                             </td>
+                            <td class="font-weight-bolder">{{ strtoupper($lib->lang_code) }}</td>
                             <td>
                                 @if ($lib->is_active == '1')
                                     <span class="label label-lg label-light-success label-inline">Aktif</span>
@@ -249,15 +252,23 @@
                                             <div class="form-group col-4">
                                                 <label for="recipient-name" class="col-form-label">Döküman
                                                     Kategorisi Seçiniz</label>
-                                                <select class="custom-select" name="library_category_guid">
+                                                <select class="form-control" name="library_category_slug">
                                                     <option value="" selected>Kategori Seçiniz</option>
                                                     @foreach ($library_categories as $lc)
-                                                        <option value="{{ $lc->library_category_guid }}">
+                                                        <option value="{{ $lc->slug }}">
                                                             {{ $lc->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-4">
+                                             <div class="form-group col-2">
+                                            <label for="lang_code" class="col-form-label">Dil</label>
+                                            <select name="lang_code" class="form-control" required>
+                                                @foreach ($languages as $lang)
+                                                    <option value="{{ $lang->code }}">{{ $lang->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                            <div class="form-group col-2">
                                                 <label for="recipient-name" class="col-form-label">Durumu</label>
                                                 <select class="form-control" name="is_active">
                                                     <option value="1">Aktif</option>

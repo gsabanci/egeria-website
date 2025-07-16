@@ -36,6 +36,7 @@ class JobCategoryController extends Controller
         $category->jc_guid=Str::uuid();
         $category->name=$r->name;
         $category->slug=Str::slug($r->name);
+        $category->lang_code=$r->lang_code;
         $category->save();
         return redirect()->back()->with('success','Kategori başarıyla eklendi.');
     }

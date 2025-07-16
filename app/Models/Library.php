@@ -11,7 +11,7 @@ class Library extends Model
     use HasFactory, SoftDeletes;
 
     public function category()
-    {
-        return $this->hasOne(LibraryCategory::class, 'library_category_guid', 'library_category_guid');
-    }
+{
+    return $this->belongsTo(LibraryCategory::class, 'library_category_slug', 'slug'  );
+}
 }

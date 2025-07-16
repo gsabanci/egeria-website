@@ -8,7 +8,7 @@
                         <a href="/">Egeria</a> <span>/</span>
                     </div>  
                     <div class="c-breadcrumb__item">
-                        Çözümler <span>/</span> 
+                        {{ optional($static_texts->get('cozumler'))->value }} <span>/</span> 
                     </div>  
                     <div class="c-breadcrumb__item c-breadcrumb__item--last">
                         {{ $service_detail->name }}

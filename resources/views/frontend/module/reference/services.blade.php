@@ -5,10 +5,7 @@
             <div class="col-md-12 col-lg-7">
                 <div class="c-title">
                     <h3 class="c-title__heading c-title__heading--gray">
-                        Egeria 15 yılı aşkın bir süredir <f>savunma & havacılık, üretim, servis, proje endüstrileri
-                            ve
-                            tesis
-                            yoğun endüstriler </f>için entegre iş çözümleri (ERP,FSM,PLM,EAM) sunar.
+                       {{ $giris_banner_subdesc->text }}
                     </h3>
                 </div>
             </div>
@@ -38,7 +35,7 @@
                                     </div>
                                     <div class="c-service-card__link" style="position: relative;
                                     z-index: 99;" href="{{ route('industry_detail',['slug'=>$i->slug]) }}">
-                                        <a class="c-button c-button--transparent" href="{{ route('industry_detail',['slug'=>$i->slug]) }}">Daha fazla bilgi alın</a>
+                                        <a class="c-button c-button--transparent" href="{{ route('industry_detail',['slug'=>$i->slug]) }}">{{ optional($static_texts->get('bilgi-metni'))->value }}</a>
                                     </div>
                                 </div>
                             </div>

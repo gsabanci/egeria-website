@@ -8,12 +8,12 @@
                         <a href="/">Egeria</a> <span>/</span>
                     </div>  
                     <div class="c-breadcrumb__item">
-                        Bize Ulaşın 
+                        {{ optional($static_texts->get('bize-ulasin'))->value }}
                     </div>  
                    
                 </div>
                 <div class="c-title">
-                    <h2 class="c-title__heading">Bize Ulaşın</h2>
+                    <h2 class="c-title__heading">{{ optional($static_texts->get('bize-ulasin'))->value }}</h2>
                 </div>
             </div>
         </div>

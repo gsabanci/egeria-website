@@ -6,13 +6,13 @@
                 <div class="c-filter">
                     <div class="c-filter__head">
                         <h4 class="c-filter__title">
-                            Kategoriler
+                            {{ optional($static_texts->get('kategoriler'))->value }}
                         </h4>
                     </div>
                     <div class="c-filter__buttons">
                         <div class="owl-carousel owl-theme c-slider--filter">
                             <div class="item">
-                                <a href="{{ route('career') }}" class="c-button c-button--white-bordered c-button-sm-w c-button--block ">Tüm İlanlar</a>
+                                <a href="{{ route('career') }}" class="c-button c-button--white-bordered c-button-sm-w c-button--block ">{{ optional($static_texts->get('tum-ilanlar'))->value }}</a>
                             </div>
                             @foreach ($job_categories as $jc)
                             <div class="item">

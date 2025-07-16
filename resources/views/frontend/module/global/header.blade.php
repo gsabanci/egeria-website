@@ -13,7 +13,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
                         <a class="nav-link dropdown-toggle" href="#" id="solutions" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Çözümler</a>
+                            aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['cozumler'] }}</a>
                         <div class="dropdown-menu" aria-labelledby="solutions">
                             @foreach ($all_services as $service)
                                 <a class="dropdown-item"
@@ -23,7 +23,7 @@
                     </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
                         <a class="nav-link dropdown-toggle" href="#" id="sectors" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Sektörler</a>
+                            aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['sektorler'] }}</a>
                         <div class="dropdown-menu" aria-labelledby="sectors">
                             @foreach ($all_industries as $industry)
                                 <a class="dropdown-item"
@@ -33,40 +33,39 @@
                     </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
                         <a class="nav-link dropdown-toggle" href="#" id="news" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Haberler</a>
+                            aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['haberler'] }}</a>
                         <div class="dropdown-menu" aria-labelledby="news">
-                            <a href="{{ route('news') }}" class="dropdown-item">Tüm Haberler</a>
+                            <!-- <a href="{{ route('news') }}" class="dropdown-item">Tüm Haberler</a> -->
                             @foreach ($all_news_categories as $nc)
-                                <a class="dropdown-item"
-                                    href="{{ route('news_category', ['slug' => $nc->slug]) }}">{{ $nc->name }}</a>
+                                                    <a class="dropdown-item" href="{{ $nc->slug === 'tum-haberler'
+                                ? route('news')
+                                : route('news_category', ['slug' => $nc->slug]) }}">{{ $nc->name }}</a>
                             @endforeach
                         </div>
                     </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item">
-                        <a class="nav-link" href="{{ route('references') }}">Müşteriler</a>
+                        <a class="nav-link" href="{{ route('references') }}">{{ $menuCategories['musteriler'] }}</a>
                     </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
                         <a class="nav-link dropdown-toggle" href="#" id="sectors" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Kariyer</a>
+                            aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['kariyer'] }}</a>
                         <div class="dropdown-menu" aria-labelledby="sectors">
                             @foreach ($all_job_categories as $jc)
-                                <a class="dropdown-item"
-                                    href="{{ route('filter', $jc->slug) }}">{{ $jc->name }}</a>
+                                <a class="dropdown-item" href="{{ route('filter', $jc->slug) }}">{{ $jc->name }}</a>
                             @endforeach
                         </div>
                     </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
                         <a class="nav-link dropdown-toggle" href="#" id="sectors" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Kütüphane</a>
+                            aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['kutuphane'] }}</a>
                         <div class="dropdown-menu" aria-labelledby="sectors">
                             @foreach ($all_lib_cats as $lc)
-                                <a class="dropdown-item"
-                                    href="{{ route('lib_category', $lc->slug) }}">{{ $lc->title }}</a>
+                                <a class="dropdown-item" href="{{ route('lib_category', $lc->slug) }}">{{ $lc->title }}</a>
                             @endforeach
                         </div>
                     </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item">
-                        <a class="nav-link" href="{{ route('contact') }}">Bize Ulaşın</a>
+                        <a class="nav-link" href="{{ route('contact') }}">{{ $menuCategories['bize-ulasin'] }}</a>
                     </li>
                 </ul>
             </div>
@@ -74,7 +73,7 @@
 
         <div class="c-navbar__right">
             <a href="" class="c-button c-button--sm c-button--sm-w c-button--elevate-green" data-toggle="modal"
-                data-target="#modalComponent">Demo Talep Et</a>
+                data-target="#modalComponent">{{ $menuCategories['demo-talep-et'] }}</a>
             <div class="l-navbar__menu-right">
                 <div class="c-hamburger">
                     <div class="c-hamburger__wrapper">
@@ -85,6 +84,23 @@
                 </div>
             </div>
         </div>
+        <div class="dropdown d-inline-block ml-2">
+            <button
+                class="btn btn-sm border border-white text-white bg-transparent rounded-pill px-3 py-1 dropdown-toggle"
+                type="button" id="langDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                style="font-size: 13px; line-height: 1.2;">
+                {{ $languages->firstWhere('code', App::getLocale())?->name ?? strtoupper(App::getLocale()) }}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="langDropdown">
+                @foreach ($languages as $lang)
+                    <a class="dropdown-item small" href="?lang={{ $lang->code }}">
+                        {{ $lang->name }}
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
+
     </div>
 </nav>
 

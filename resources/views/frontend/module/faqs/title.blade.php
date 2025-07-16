@@ -8,11 +8,11 @@
                         <a href="/">Egeria</a> <span>/</span>
                     </div>  
                     <div class="c-breadcrumb__item c-breadcrumb__item--last">
-                       Sık Sorulan Sorular
+                        {{ optional($static_texts->get('sss-metin'))->value }}
                     </div>
                 </div>
                 <div class="c title">
-                    <h2 class="c-title__heading">Sık Sorulan Sorular</h2>
+                    <h2 class="c-title__heading"> {{ optional($static_texts->get('sss-metin'))->value }}</h2>
                 </div>
             </div>
         </div>
