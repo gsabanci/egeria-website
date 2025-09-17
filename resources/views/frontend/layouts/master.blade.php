@@ -117,19 +117,19 @@
             var cc = $('#contactCaptcha')
             if (cc.length > 0) {
                 grecaptcha.render(document.getElementById('contactCaptcha'), {
-                    'sitekey': '6LfYsCEdAAAAAKPoz18YAKWU9-OErQdUsitQe_xs',
+                    'sitekey': env('GOOGLE_RECAPTCHA_KEY'),
                     'theme': 'light',
                 });
             }
             var jc = $('#jobCaptcha')
             if (jc.length > 0) {
                 grecaptcha.render(document.getElementById('jobCaptcha'), {
-                    'sitekey': '6LfYsCEdAAAAAKPoz18YAKWU9-OErQdUsitQe_xs',
+                    'sitekey': env('GOOGLE_RECAPTCHA_KEY'),
                     'theme': 'light'
                 });
             }
             grecaptcha.render(document.getElementById('demoReq'), {
-                'sitekey': '6LfYsCEdAAAAAKPoz18YAKWU9-OErQdUsitQe_xs',
+                'sitekey': env('GOOGLE_RECAPTCHA_KEY'),
                 'theme': 'light'
             });
         };
