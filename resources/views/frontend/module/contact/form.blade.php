@@ -1,3 +1,50 @@
+@php
+    $raw = optional($static_texts->get('gizlilik-metni'))->value ?? '';
+    $usedSlugs = [];
+
+    $rendered = preg_replace_callback('/\[\[([a-z0-9\-]+)\]\]/i', function ($m) use ($policies, &$usedSlugs) {
+        $slug = $m[1];
+        $p = $policies instanceof \Illuminate\Support\Collection ? $policies->get($slug) : ($policies[$slug] ?? null);
+        if (!$p)
+            return e($slug);
+        $usedSlugs[] = $slug;
+        $title = e($p->title ?? $slug);
+        return '<span style="cursor: pointer; text-decoration: underline" class="c-policy-link" role="button" tabindex="0" data-toggle="modal" data-target="#modal_' . e($slug) . '">' . $title . '</span>';
+    }, $raw);
+
+    $usedSlugs = array_values(array_unique($usedSlugs));
+@endphp
+@foreach ($usedSlugs as $slug)
+    @php
+        $p = $policies instanceof \Illuminate\Support\Collection ? $policies->get($slug) : ($policies[$slug] ?? null);
+    @endphp
+    @if ($p)
+        <div class="modal fade" id="modal_{{ $slug }}" tabindex="-1" role="dialog" aria-labelledby="{{ $slug }}-label"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 id="{{ $slug }}-label" class="c-title__heading c-title__heading--medium m-2">
+                            {{ $p->title ?? ucfirst(str_replace('-', ' ', $slug)) }}
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="@lang('Close')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body c-modal__body m-3">
+                        <div class="policy-content-reset">
+                            {!! $p->content !!}
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Close')</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+@endforeach
 <form action="{{ route('send_form') }}" method="POST" id="contactform">
     @csrf
     <div class="c-title">
@@ -25,7 +72,8 @@
             <input type="text" class="form-control c-input" name="name" id="inputName" required>
         </div>
         <div class="form-group col-md-6 mb-0">
-            <label class="c-input__label" for="inputLastname">{{ optional($static_texts->get('soyisim'))->value }}</label>
+            <label class="c-input__label"
+                for="inputLastname">{{ optional($static_texts->get('soyisim'))->value }}</label>
             <input type="text" class="form-control c-input" name="surname" id="inputLastname" required>
         </div>
     </div>
@@ -45,18 +93,14 @@
     </div>
     <div class="form-group mb-0">
         <label class="c-input__label" for="inputMsg">{{ optional($static_texts->get('mesaj'))->value }}</label>
-        <textarea type="tel" class="form-control c-input c-input--textarea" id="inputMsg" name="msg" required></textarea>
+        <textarea type="tel" class="form-control c-input c-input--textarea" id="inputMsg" name="msg"
+            required></textarea>
     </div>
     <div class="form-group mb-0 u-mg-y-20">
         <input type="checkbox" class="c-checkbox" onclick="check()" id="inputChck" checked required>
         <label class="c-input__label" for="inputChck">
-            <!-- <span style="cursor: pointer; text-decoration: underline" data-toggle="modal"
-                data-target="#gizlilik-sozlesmesi-modal">Gizlilik Sözleşmesini</span> ve -->
-            <span style="cursor: pointer; text-decoration: underline" data-toggle="modal"
-                data-target="#kvkk-aydinlatma-metni-modal">{{ $gizlilik_onayi->text }}</span>
-           
+            {!! $rendered !!}
         </label>
-        <!-- >Gizlilik Sözleşmesi</a> -->
     </div>
     <div class="form-group mb-0 u-mg-b-20">
         <div id="contactCaptcha" data-expired-callback="contactCaptchaCallback" data-callback="contactCaptchaCallback"

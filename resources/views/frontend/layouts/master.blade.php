@@ -33,7 +33,7 @@
     <link href="{{ asset('frontend/scripts/toastr/toastr.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/assets/css/slick.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/assets/css/slick-theme.css') }}" rel="stylesheet" />
-    <link href="{{ asset('frontend/assets/css/index.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/assets/css/index.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/assets/css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/assets/css/select2.min.css') }}" rel="stylesheet" />
     <!-- <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css"/> -->

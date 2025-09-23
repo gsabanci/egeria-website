@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $category->c_guid = Str::uuid();
         $category->name = $r->name;
         $category->lang_code = $r->lang_code;
-        $category->slug = Str::slug($r->name);
+        $category->slug = $r->slug;
         $category->queue = $r->queue;
         $category->save();
         return redirect()->back()->with('success', 'Kategori başarıyla eklendi.');
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     {
         $update = Category::where('c_guid', $r->c_guid)->first();
         $update->name = $r->name;
-        $update->slug = Str::slug($r->name);
+        $update->slug = $r->slug;
         $update->update();
         return redirect()->back()->with('success', 'Kategori başarıyla güncellendi.');
     }

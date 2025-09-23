@@ -14,7 +14,8 @@
     <div class="card-header border-0 py-5">
         <h3 class="card-title align-items-start flex-column">
             <span class="card-label font-weight-bolder text-dark">{{ $news->title }} Detay
-                 <span class="text-primary font-weight-bold ml-2" style="font-size: 14px;">[{{ strtoupper($news->lang_code) }}]</span>
+                <span class="text-primary font-weight-bold ml-2"
+                    style="font-size: 14px;">[{{ strtoupper($news->lang_code) }}]</span>
             </span>
             <span class="text-muted mt-3 font-weight-bold font-size-sm">Aşağıda sistemde yer alan {{ $news->title }}
                 adlı
@@ -56,8 +57,9 @@
                     <select class="form-control" name="nc_guid">
                         <option value="">Kategori seçin</option>
                         @foreach ($categories as $c)
-                            <option value="{{ $c->nc_guid }}"
-                                {{ $news->nc_guid == $c->nc_guid ? 'selected' : null }}>{{ $c->name }}</option>
+                            <option value="{{ $c->nc_guid }}" {{ $news->nc_guid == $c->nc_guid ? 'selected' : null }}>
+                                {{ $c->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -67,9 +69,26 @@
                     <textarea type="text" rows="6" class="form-control" name="short_desc"
                         onkeyup="editPrevShort(event, {{ $news->id }})">{{ $news->short_desc }}</textarea>
                 </div>
+                @php
+                    $contentUrl = $news->image ? asset('storage/news_photos/' . $news->image) : null;
+                    $coverUrl = $news->coverimage ? asset('storage/news_photos/' . $news->coverimage) : null;
+                @endphp
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">İçerik
                         Resmi</label>
+                    <div class="mb-2">
+                        @if($contentUrl)
+                            <a href="{{ $contentUrl }}" target="_blank" rel="noopener noreferrer"
+                                class="img-thumb-box mb-2 d-inline-block">
+                                <img src="{{ $contentUrl }}" alt="İçerik Resmi" width="250px" height="160px">
+                            </a>
+                        @else
+                            <div
+                                class="img-thumb-box mb-2 d-flex align-items-center justify-content-center text-muted small">
+                                Görsel yok
+                            </div>
+                        @endif
+                    </div>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="image" id="customFile">
                         <label class="custom-file-label" for="customFile">Resim
@@ -79,6 +98,19 @@
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Kapak
                         Resmi</label>
+                    <div class="mb-2">
+                        @if($coverUrl)
+                            <a href="{{ $coverUrl }}" target="_blank" rel="noopener noreferrer"
+                                class="img-thumb-box mb-2 d-inline-block">
+                                <img src="{{ $coverUrl }}" alt="Kapak Resmi" width="250px" height="160px">
+                            </a>
+                        @else
+                            <div
+                                class="img-thumb-box mb-2 d-flex align-items-center justify-content-center text-muted small">
+                                Görsel yok
+                            </div>
+                        @endif
+                    </div>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="coverimage" id="customFile"
                             onchange="editPrevImage(event, {{ $news->id }})">
@@ -89,12 +121,13 @@
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Haber
                         Detay</label>
-                    <textarea class="summernote" type="text" name="detail" class="form-control">{{ $news->detail }}</textarea>
+                    <textarea class="summernote" type="text" name="detail"
+                        class="form-control">{{ $news->detail }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Görüntülenme Sırası</label>
-                    <input type="number" min="0" max="1000000" class="form-control"
-                        value="{{ $news->queue }}" name="queue">
+                    <input type="number" min="0" max="1000000" class="form-control" value="{{ $news->queue }}"
+                        name="queue">
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Durumu</label>
@@ -113,7 +146,7 @@
 </form>
 @section('js')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.summernote').summernote({
                 minHeight: 300,
                 toolbar: [
@@ -127,20 +160,20 @@
             });
         })
 
-        var editPrevImage = function(event, id) {
+        var editPrevImage = function (event, id) {
             var output = document.getElementById('edit_news_image_' + id);
             output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
+            output.onload = function () {
                 URL.revokeObjectURL(output.src)
             }
         };
 
-        var editPrevTitle = function(event, id) {
+        var editPrevTitle = function (event, id) {
             $('#edit_news_title_' + id).html('');
             $('#edit_news_title_' + id).html(event.target.value);
         }
 
-        var editPrevShort = function(event, id) {
+        var editPrevShort = function (event, id) {
             $('#edit_news_desc_' + id).html('');
             $('#edit_news_desc_' + id).html(event.target.value);
         }

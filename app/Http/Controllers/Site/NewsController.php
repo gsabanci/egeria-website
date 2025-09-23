@@ -26,7 +26,11 @@ class NewsController extends Controller
 
     public function category($slug)
     {
-        $category = NewsCategory::whereSlug($slug)->first();
+        $lang = App::getLocale();
+
+        $category = NewsCategory::where('slug', $slug)
+                  ->where('lang_code', $lang)
+                  ->first();
         if (is_null($category)) {
             return redirect()->back();
         }

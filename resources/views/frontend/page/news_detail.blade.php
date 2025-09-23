@@ -11,7 +11,7 @@
 						<a href="/">Egeria</a> <span>/</span>
 					</div>  
 					<div class="c-breadcrumb__item">
-					<a href="/haberler">Haberler</a> <span>/</span>
+					<a href="/haberler">{{ optional($static_texts->get('haberler'))->value }}</a> <span>/</span>
 					</div>  
 					<div class="c-breadcrumb__item c-breadcrumb__item--last">
 					{{ $news_detail->title }}
@@ -31,7 +31,7 @@
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="c-blog__date">
-						<p>Yayınlanma Tarihi</p>
+						<p>{{ optional($static_texts->get('yayinlanma-tarihi'))->value }}</p>
 						<p>{{ date('d F Y',strtotime($news_detail->created_at)) }}</p>
 					</div>
 				</div>

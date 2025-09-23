@@ -48,7 +48,7 @@ class JobController extends Controller
         $job = new Job();
         $job->job_guid = Str::uuid();
         $job->title = $r->title;
-        $job->slug = Str::slug($r->title);
+        $job->slug = $r->slug;
         $job->desc = $r->desc;
         $job->jc_guid = $r->jc_guid;
         $job->short_desc = $r->short_desc;
@@ -80,7 +80,7 @@ class JobController extends Controller
     {
         $job = Job::where('job_guid', $r->job_guid)->first();
         $job->title = $r->title;
-        $job->slug = Str::slug($r->title);
+        $job->slug = $r->slug;
         $job->desc = $r->desc;
         $job->jc_guid = $r->jc_guid;
         $job->short_desc = $r->short_desc;

@@ -207,6 +207,11 @@
         </table>
     </div>
 </div>
+  @if($sss->lastPage() > 1)
+        <div class="card-footer">
+            {{ $sss->links('backend.modules.global.paginator', ['paginator' => $sss]) }}
+        </div>
+    @endif
 @section('js')
     <script>
         var KTSummernoteDemo = function() {

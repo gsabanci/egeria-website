@@ -135,7 +135,7 @@ class AppServiceProvider extends ServiceProvider
         $labors = Labor::where('lang_code', $lang)->orderBy('queue')->get();
         view()->share('labors', $labors);
 
-        $policies = Policy::get();
+        $policies = Policy::where('lang_code',$lang)->get()->keyBy('slug');
         view()->share('policies', $policies);
 
         $all_job_categories = JobCategory::where('lang_code', $lang)->get();

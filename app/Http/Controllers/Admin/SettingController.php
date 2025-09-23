@@ -121,8 +121,8 @@ class SettingController extends Controller
         $d['data'] = array(
             'button' => array(
 
-                'title' => null,
-                'id' => null,
+                'title' => 'Sözleşme Ekle',
+                'id' => 'sozlesmeekle',
             ),
             'pagetitle' => 'Sözleşmeler',
             'records' => null,
@@ -132,9 +132,24 @@ class SettingController extends Controller
 
     }
 
+    public function policy_add(Request $r)
+    {
+        $policy = new Policy();
+        $policy->policy_guid = Str::uuid();
+        $policy->title = $r->title;
+        $policy->slug = $r->slug;
+        $policy->lang_code = $r->lang_code;
+        $policy->content = $r->content;
+        $policy->save();
+
+        return redirect()->back();
+    }
+
     public function policy_update(Request $r)
     {
         $p = Policy::where("policy_guid", $r->policy_guid)->first();
+        $p->slug = $r->slug;
+        $p->title = $r->title;
         $p->content = $r->content;
         $p->update();
 

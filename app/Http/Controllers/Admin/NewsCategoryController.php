@@ -37,7 +37,8 @@ class NewsCategoryController extends Controller
         $category = new NewsCategory();
         $category->nc_guid = Str::uuid();
         $category->name = $r->name;
-        $category->slug = Str::slug($r->name);
+        $category->slug = $r->slug;
+        $category->lang_code = $r->lang_code;
         $category->save();
         return redirect()->back()->with('success', 'Kategori başarıyla eklendi.');
     }
@@ -45,7 +46,7 @@ class NewsCategoryController extends Controller
     {
         $update = NewsCategory::where('nc_guid', $r->nc_guid)->first();
         $update->name = $r->name;
-        $update->slug = Str::slug($r->name);
+        $update->slug = $r->slug;
         $update->update();
         return redirect()->back()->with('success', 'Kategori başarıyla güncellendi.');
     }

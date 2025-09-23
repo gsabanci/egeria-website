@@ -7,7 +7,7 @@
             </a>
             <a class="navbar-brand l-navbar__brand l-navbar__brand--small" href="{{ route('homepage') }}"
                 aria-label="ifs">
-                <img class="l-navbar__icon" src="{{ asset('frontend/assets/images/ifs_icon.svg') }}" alt="" />
+                <img class="l-navbar__icon" src="{{ asset('frontend/assets/images/ifs_icon.png') }}" alt="" />
             </a>
             <div class="c-navbar__menu l-navbar__menu l-navbar__menu-links d-none d-lg-flex">
                 <ul class="navbar-nav ml-auto">
@@ -67,38 +67,51 @@
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item">
                         <a class="nav-link" href="{{ route('contact') }}">{{ $menuCategories['bize-ulasin'] }}</a>
                     </li>
+                    <li class="nav-item c-navbar__menu-item l-navbar__menu-item d-lg-none">
+                        <a href="" class="c-button c-button--sm c-button--sm-w c-button--elevate-green"
+                            data-toggle="modal" data-target="#modalComponent">{{ $menuCategories['demo-talep-et'] }}</a>
+                    </li>
                 </ul>
             </div>
         </div>
-
-        <div class="c-navbar__right">
-            <a href="" class="c-button c-button--sm c-button--sm-w c-button--elevate-green" data-toggle="modal"
-                data-target="#modalComponent">{{ $menuCategories['demo-talep-et'] }}</a>
-            <div class="l-navbar__menu-right">
+        <div class="c-navbar__right d-flex align-items-center justify-content-center">
+            <div class="l-navbar__menu-right d-flex align-items-center">
                 <div class="c-hamburger">
-                    <div class="c-hamburger__wrapper">
+                    <div class="c-hamburger__wrapper mr-2">
                         <div class="c-hamburger__bar c-hamburger__bar--top"></div>
                         <div class="c-hamburger__bar c-hamburger__bar--middle"></div>
                         <div class="c-hamburger__bar c-hamburger__bar--bottom"></div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="dropdown d-inline-block ml-2">
-            <button
-                class="btn btn-sm border border-white text-white bg-transparent rounded-pill px-3 py-1 dropdown-toggle"
-                type="button" id="langDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                style="font-size: 13px; line-height: 1.2;">
-                {{ $languages->firstWhere('code', App::getLocale())?->name ?? strtoupper(App::getLocale()) }}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="langDropdown">
-                @foreach ($languages as $lang)
-                    <a class="dropdown-item small" href="?lang={{ $lang->code }}">
-                        {{ $lang->name }}
+            <div class="c-nav-actions">
+                <div class="dropdown">
+                    <button
+                        class="btn btn-sm border border-white text-white bg-transparent rounded-pill px-3 py-1 dropdown-toggle btn-lang dropdown-toggle"
+                        type="button" id="langDropdown" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{ $languages->firstWhere('code', App::getLocale())?->name ?? strtoupper(App::getLocale()) }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="langDropdown">
+                        @foreach ($languages as $lang)
+                            <a class="dropdown-item small" href="?lang={{ $lang->code }}">
+                                {{ $lang->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="c-demo-cta ml-2">
+                    <a href=""
+                        class="c-button c-button--sm c-button--sm-w c-button--elevate-green ml-2"
+                        data-toggle="modal" data-target="#modalComponent">
+                        {{ $menuCategories['demo-talep-et'] }}
                     </a>
-                @endforeach
+                </div>
             </div>
         </div>
+
+    </div>
+
 
 
     </div>

@@ -131,8 +131,10 @@
                                         <div class="modal-body">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="slug">URL Başlığı <span class="text-danger">*</span></label>
+                                                <label for="slug">Tanımlayıcı(URL Başlığı)<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" value="{{ $service->slug }}" id="slug" name="slug" required />
+                                                 <small class="form-text text-muted">
+                                                Not: Bu alan diller arasında ortak bir anahtardır (ID). Aynı içeriğin farklı dilleri için aynı id kullanılmalıdır</small>
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">Çözüm Adı</label>
@@ -214,7 +216,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="slug">URL Başlığı <span class="text-danger">*</span></label>
+                                            <label for="slug">Tanımlayıcı(URL Başlığı) <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="slug" name="slug" required />
                                         </div>
                                         <div class="form-group">
