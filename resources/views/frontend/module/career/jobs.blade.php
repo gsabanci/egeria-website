@@ -2,11 +2,13 @@
 <section class="c-section">
     <div class="container">
         <div class="row">
+            @if(isset($jobs) && method_exists($jobs, 'isNotEmpty') && $jobs->isNotEmpty())
             <div class="col-12">
                 <div class="c-title">
                     <h4 class="c-title__heading">{{ optional($static_texts->get('is-ilanlari'))->value }}</h4>
                 </div>
             </div>
+            @endif
         </div>
         <div class="row u-mg-t-20">
             @foreach ($jobs as $j)

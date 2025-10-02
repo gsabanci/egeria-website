@@ -169,7 +169,8 @@ Route::post('/demo-req-delete', [DemoController::class, 'delete'])->name('admin.
 
 //SOZLESMELER
 Route::get('/contracts', [SettingController::class, 'contract'])->name('admin.contract');
-Route::post('/contracts', [SettingController::class, 'policy_update'])->name('admin.policy_update');
+Route::post('/policy-add', [SettingController::class, 'policy_add'])->name('admin.policy_add');
+Route::post('/policy-update', [SettingController::class, 'policy_update'])->name('admin.policy_update');
 
 //SUBSCRİPTİON
 

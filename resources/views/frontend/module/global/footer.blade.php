@@ -36,7 +36,7 @@
                         <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="Egeria" aria-label="Egeria">
                     </div>
                     <div>
-                        <img src="{{ asset('frontend/assets/images/ifs_icon.svg') }}" alt="IFS" aria-label="IFS">
+                        <img src="{{ asset('frontend/assets/images/ifs_icon.png') }}" alt="IFS" aria-label="IFS">
                     </div>
                 </div>
 

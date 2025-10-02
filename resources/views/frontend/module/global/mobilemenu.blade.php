@@ -76,13 +76,17 @@
                     </a>
                 </li>
                 <li class="c-mobile-menu__list-item">
+                    <a href="#modalComponent" class="c-button c-button--sm c-button--sm-w c-button--elevate-green" data-toggle="modal"
+                        data-target="#modalComponent">{{ $menuCategories['demo-talep-et'] }}</a>
+                </li>
+                <li class="c-mobile-menu__list-item">
                     <a href="">
-                        <img width="140px" src="{{ asset('frontend/assets/images/ifs_icon.svg') }}" alt="" />
+                        <img width="140px" src="{{ asset('frontend/assets/images/ifs_icon.png') }}" alt="" />
                     </a>
                 </li>
             </ul>
         </div>
-
     </div>
-
 </div>
+<!-- Modal -->
+@include('frontend/module/global/requestDemo')

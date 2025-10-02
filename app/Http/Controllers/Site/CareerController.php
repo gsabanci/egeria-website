@@ -11,6 +11,7 @@ use App\Mail\CareerMail;
 use App\Models\JobApply;
 use App\Models\CareerPage;
 use App\Models\JobCategory;
+use App\Models\StaticText;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\SystemSetting;
@@ -25,12 +26,12 @@ class CareerController extends Controller
 
         $d['jc_guid'] = null;
         $d['job_categories'] = JobCategory::where('lang_code', $lang)->get();
-        $d['jobs'] = Job::where('lang_code', $lang)->with('offices.office')->get();
+        $d['jobs'] = Job::where('lang_code', $lang)->where('is_active',1)->with('offices.office')->get();
         $d['office_count'] = Office::count();
         $d['languages'] = Language::where('is_active', 1)->get();
         $d['faq'] = JobFaq::where('lang_code', $lang)->get();
-        $d['page_title'] = 'Kariyer';
-        $d['shortlink_title'] = 'Kariyer';
+        $d['page_title'] = StaticText::where('key', 'kariyer')->where('lang_code', $lang)->first()->value;
+        $d['shortlink_title'] = StaticText::where('key', 'kariyer')->where('lang_code', $lang)->first()->value;
         $d['title'] = CareerPage::where('lang_code', $lang)->first()->title;
         $d['subtitle'] = CareerPage::where('lang_code', $lang)->first()->subtitle;
         return view('frontend.page.career', $d);
@@ -40,15 +41,15 @@ class CareerController extends Controller
     {
         $lang = App::getLocale();
 
-        $guid = JobCategory::where('slug', $slug)->first();
+        $guid = JobCategory::where('slug', $slug)->where('lang_code', $lang)->first();
         $d['job_categories'] = JobCategory::where('lang_code', $lang)->get();
         $d['jobs'] = Job::where('lang_code', $lang)
-            ->where('jc_guid', $guid->jc_guid)->with('office')->get();
+            ->where('jc_guid', $guid->jc_guid)->where('is_active', 1)->with('office')->get();
         $d['faq'] = JobFaq::where('lang_code', $lang)->get();
         $d['jc_guid'] = $guid->jc_guid;
         $d['office_count'] = Office::count();
-        $d['page_title'] = 'Kariyer';
-        $d['shortlink_title'] = 'Kariyer';
+        $d['page_title'] = StaticText::where('key', 'kariyer')->where('lang_code', $lang)->first()->value;
+        $d['shortlink_title'] = StaticText::where('key', 'kariyer')->where('lang_code', $lang)->first()->value;
         $d['title'] = CareerPage::where('lang_code', $lang)->first()->title;
         $d['subtitle'] = CareerPage::where('lang_code', $lang)->first()->subtitle;
         return view('frontend.page.career', $d);
@@ -56,7 +57,9 @@ class CareerController extends Controller
 
     public function detail($slug)
     {
-        $d['job_detail'] = Job::Where('slug', $slug)->first();
+        $lang = App::getLocale();
+
+        $d['job_detail'] = Job::Where('slug', $slug)->where('lang_code', $lang)->first();
         $d['page_title'] = $d['job_detail']->title . ' Başvuru Formu';
         $d['shortlink_title'] = $d['job_detail']->title . ' Başvuru Formu';
 

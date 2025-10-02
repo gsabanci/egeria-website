@@ -46,7 +46,7 @@ class ServiceController extends Controller
         $service = new Service();
         $service->services_guid = Str::uuid();
         $service->name = $r->name;
-        $service->slug = $r->slug ?: Str::slug($r->name);
+        $service->slug = $r->slug;
         $service->lang_code = $r->lang_code;
         $service->queue = $r->queue;
         $service->is_active = $r->is_active;
@@ -58,7 +58,7 @@ class ServiceController extends Controller
     {
         $service = Service::where('services_guid', $r->services_guid)->first();
         $service->name = $r->name;
-        $service->slug = $r->slug ?: Str::slug($r->name);
+        $service->slug = $r->slug;
         $service->queue = $r->queue;
         $service->is_active = $r->is_active;
         $service->update();

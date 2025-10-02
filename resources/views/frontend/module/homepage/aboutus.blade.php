@@ -57,7 +57,7 @@
                                         {{ $ac->content }}
                                     </div>
                                     <div class="c-iconCard__content-action">
-                                        <a href="{{ !is_null($ac->link) ? $ac->link : 'javascript:;' }}"
+                                        <a href="{{ !is_null($ac->link) ? url($ac->link) : 'javascript:;' }}"
                                             class="c-button c-button--elevate-purple c-button--xs c-button--xs-w">{{ optional($static_texts->get('daha-fazla-metin'))->value }}</a>
                                     </div>
                                 </div>

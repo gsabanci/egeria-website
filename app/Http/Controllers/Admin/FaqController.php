@@ -22,6 +22,7 @@ class FaqController extends Controller
         $d['career_content']=CareerPage::first();
         $d['theme'] = Theme::where('id', 1)->first();
         $d['sss']=JobFaq::orderBy('queue', 'ASC')->paginate(10);
+        $d['faqs_count'] = JobFaq::get()->count();
         $d['languages'] = Language::where('is_active', 1)->get();
         $d['data'] = array(
             'button' => array(
@@ -30,7 +31,7 @@ class FaqController extends Controller
                 'id' => 'sssekle'
             ),
             'pagetitle' => 'SSS',
-            'records' => null,
+            'records' => $d['faqs_count'],
             'has_search' => null
         );
         return view('backend.pages.faqs', $d);

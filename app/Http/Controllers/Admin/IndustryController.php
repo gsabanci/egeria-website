@@ -45,7 +45,7 @@ class industryController extends Controller
         $industry=new industry();
         $industry->industry_guid=Str::uuid();
         $industry->name=$r->name;
-        $industry->slug=Str::slug($r->name);
+        $industry->slug=$r->slug;
         $industry->lang_code = $r->lang_code;
         $industry->queue=$r->queue;
         $industry->save();
@@ -58,7 +58,7 @@ class industryController extends Controller
         $industry=industry::where('industry_guid',$r->industry_guid)->first();
         $industry->name=$r->name;
         $industry->queue=$r->queue;
-        $industry->slug=Str::slug($r->name);
+        $industry->slug=$r->slug;
         $industry->update();
         return redirect()->back()->with('success','Başarıyla Düzenlendi');
     }

@@ -120,11 +120,18 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="form-group col-6">
+                                                 <div class="form-group col-2">
+                                            <label for="slug" class="col-form-label">Tanımlayıcı(URL Başlığı)</label>
+                                            <input type="text" class="form-control" value="{{ $job->slug }}" name="slug">
+                                            <input type="hidden" name="job_guid" value="{{ $job->job_guid }}" >
+                                            <small class="form-text text-muted">
+                                                Not: Bu alan diller arasında ortak bir anahtardır (ID gibi). Aynı içeriğin farklı dilleri için aynı slug kullanılmalıdır</small>
+                                        </div>
+                                                <div class="form-group col-4">
                                                     <label for="recipient-name" class="col-form-label">İş Başlığı</label>
                                                     <input type="text" class="form-control" value="{{ $job->title }}"
                                                         name="title">
-                                                    <input type="hidden" name="job_guid" value="{{ $job->job_guid }}" }>
+                                                    <input type="hidden" name="job_guid" value="{{ $job->job_guid }}" >
                                                 </div>
                                                 <div class="form-group col-6">
                                                     <label for="recipient-name" class="col-form-label">Durumu</label>
@@ -244,7 +251,13 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="form-group col-6">
+                                             <div class="form-group col-2">
+                                            <label for="recipient-name" class="col-form-label">Tanımlayıcı(URL Başlığı)</label>
+                                            <input type="text" class="form-control" name="slug">
+                                            <small class="form-text text-muted">
+                                                Not: Bu alan diller arasında ortak bir anahtardır (ID gibi). Aynı içeriğin farklı dilleri için aynı slug kullanılmalıdır</small>
+                                        </div>
+                                            <div class="form-group col-4">
                                                 <label for="recipient-name" class="col-form-label">İş Başlığı</label>
                                                 <input type="text" class="form-control" name="title">
                                             </div>

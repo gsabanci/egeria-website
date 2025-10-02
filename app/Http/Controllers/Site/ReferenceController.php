@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\Reference;
 use App\Models\ReferencePage;
+use App\Models\StaticText;
 
 class ReferenceController extends Controller
 {
@@ -17,7 +18,7 @@ class ReferenceController extends Controller
         $d['references'] = Reference::orderBy('queue')->where('is_active', '1')->get();
         $d['title'] = ReferencePage::where('lang_code', $lang)->first()->first_title;
         $d['subtitle'] = ReferencePage::where('lang_code', $lang)->first()->first_title_subtitle;
-        $d['page_title'] = 'Referanslarımız';
+        $d['page_title'] = StaticText::where('key', 'referanslarimiz')->where('lang_code', $lang)->first()->value;
         $d['shortlink_title'] = 'Referanslarımız';
         return view('frontend.page.references', $d);
     }
