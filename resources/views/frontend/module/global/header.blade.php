@@ -86,23 +86,32 @@
             </div>
             <div class="c-nav-actions">
                 <div class="dropdown">
+                    @php
+                        $current = $languages->firstWhere('code', App::getLocale());
+                        $img = $current?->image ?? null
+                    @endphp
                     <button
                         class="btn btn-sm border border-white text-white bg-transparent rounded-pill px-3 py-1 dropdown-toggle btn-lang dropdown-toggle"
                         type="button" id="langDropdown" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        {{ $languages->firstWhere('code', App::getLocale())?->name ?? strtoupper(App::getLocale()) }}
+                        @if($img)
+                            <img src="{{ asset('storage/flags/' . ltrim($img, '/')) }}" alt="{{ $current?->name }}"
+                                class="mr-1" width="22" height="16" style="margin-bottom:1px;">
+                        @endif
+                        {{ $current?->name }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="langDropdown">
                         @foreach ($languages as $lang)
                             <a class="dropdown-item small" href="?lang={{ $lang->code }}">
+                                <img src="{{ asset('/storage/flags/' . $lang->image) }}" width="22" height="16"
+                                    class="mr-2">
                                 {{ $lang->name }}
                             </a>
                         @endforeach
                     </div>
                 </div>
                 <div class="c-demo-cta ml-2">
-                    <a href=""
-                        class="c-button c-button--sm c-button--sm-w c-button--elevate-green ml-2"
+                    <a href="" class="c-button c-button--sm c-button--sm-w c-button--elevate-green ml-2"
                         data-toggle="modal" data-target="#modalComponent">
                         {{ $menuCategories['demo-talep-et'] }}
                     </a>
