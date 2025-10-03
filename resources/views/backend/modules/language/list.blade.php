@@ -27,6 +27,7 @@
                     <tr class="text-left">
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Dil Kodu</th>
+                        <th style="min-width: 200px">Durumu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
                 </thead>
@@ -37,6 +38,13 @@
                             <td>
                                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $lang->name }}</span>
                                 <span class="text-muted font-weight-bold">{{ $lang->code }}</span>
+                            </td>
+                              <td>
+                                @if($lang->is_active == '1')
+                                    <span class="label label-lg label-light-success label-inline">Aktif</span>
+                                @else
+                                    <span class="label label-lg label-light-danger label-inline">Pasif</span>
+                                @endif
                             </td>
                             <td class="pr-0 text-right">
                                 <a href="#" data-toggle="modal" data-target="#modal_{{ $lang->language_guid }}"
@@ -106,6 +114,15 @@
                                                 <label for="order" class="col-form-label">Dil Adı</label>
                                                 <input type="text" class="form-control" value="{{ $lang->name }}"
                                                     name="name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Durumu</label>
+                                                <select class="form-control" name="is_active">
+                                                    <option {{ $lang->is_active == '1' ? 'selected' : '' }} value="1">Aktif
+                                                    </option>
+                                                    <option {{ $lang->is_active == '0' ? 'selected' : '' }} value="0">Pasif
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

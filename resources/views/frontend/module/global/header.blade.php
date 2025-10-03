@@ -91,14 +91,14 @@
                         $img = $current?->image ?? null
                     @endphp
                     <button
-                        class="btn btn-sm border border-white text-white bg-transparent rounded-pill px-3 py-1 dropdown-toggle btn-lang dropdown-toggle"
+                        class="btn btn-sm text-white bg-transparent rounded-pill px-3 py-1 dropdown-toggle btn-lang dropdown-toggle"
                         type="button" id="langDropdown" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                         @if($img)
                             <img src="{{ asset('storage/flags/' . ltrim($img, '/')) }}" alt="{{ $current?->name }}"
                                 class="mr-1" width="22" height="16" style="margin-bottom:1px;">
                         @endif
-                        {{ $current?->name }}
+                        <!-- {{ $current?->name }} -->
                     </button>
                     <div class="dropdown-menu dropdown-menu-right rounded" aria-labelledby="langDropdown">
                         @foreach ($languages as $lang)
