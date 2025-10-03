@@ -87,6 +87,11 @@
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 
     <script>
+        // reCAPTCHA Site Key
+        var RECAPTCHA_SITE_KEY = '{{ config("app.google_recaptcha_key") }}';
+    </script>
+
+    <script>
         $('.jarallax').jarallax({
             type: 'scroll',
         });
@@ -114,22 +119,27 @@
     @yield('js')
     <script>
         var onloadCallback = function() {
+            if (!RECAPTCHA_SITE_KEY) {
+                console.warn('reCAPTCHA Site Key not configured');
+                return;
+            }
+            
             var cc = $('#contactCaptcha')
             if (cc.length > 0) {
                 grecaptcha.render(document.getElementById('contactCaptcha'), {
-                    'sitekey': env('GOOGLE_RECAPTCHA_KEY'),
+                    'sitekey': RECAPTCHA_SITE_KEY,
                     'theme': 'light',
                 });
             }
             var jc = $('#jobCaptcha')
             if (jc.length > 0) {
                 grecaptcha.render(document.getElementById('jobCaptcha'), {
-                    'sitekey': env('GOOGLE_RECAPTCHA_KEY'),
+                    'sitekey': RECAPTCHA_SITE_KEY,
                     'theme': 'light'
                 });
             }
             grecaptcha.render(document.getElementById('demoReq'), {
-                'sitekey': env('GOOGLE_RECAPTCHA_KEY'),
+                'sitekey': RECAPTCHA_SITE_KEY,
                 'theme': 'light'
             });
         };

@@ -58,6 +58,28 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Google Maps API Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used for Google Maps integration in the application.
+    |
+    */
+
+    'google_maps_api_key' => env('GOOGLE_MAPS_API_KEY', null),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Google reCAPTCHA Site Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used for Google reCAPTCHA integration in the application.
+    |
+    */
+
+    'google_recaptcha_key' => env('GOOGLE_RECAPTCHA_KEY', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
