@@ -27,6 +27,7 @@
                     <tr class="text-left">
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Dil Kodu</th>
+                        <th style="min-width: 200px">Durumu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
                 </thead>
@@ -35,19 +36,23 @@
                         <tr>
                             <td>#{{ $lang->id }}</td>
                             <td>
-                                <span
-                                    class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $lang->name }}</span>
+                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $lang->name }}</span>
                                 <span class="text-muted font-weight-bold">{{ $lang->code }}</span>
                             </td>
+                              <td>
+                                @if($lang->is_active == '1')
+                                    <span class="label label-lg label-light-success label-inline">Aktif</span>
+                                @else
+                                    <span class="label label-lg label-light-danger label-inline">Pasif</span>
+                                @endif
+                            </td>
                             <td class="pr-0 text-right">
-                                <a href="#" data-toggle="modal"
-                                    data-target="#modal_{{ $lang->language_guid }}"
+                                <a href="#" data-toggle="modal" data-target="#modal_{{ $lang->language_guid }}"
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Write.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
                                                 <path
@@ -63,14 +68,12 @@
                                         <!--end::Svg Icon-->
                                     </span>
                                 </a>
-                                <a href="#" data-toggle="modal"
-                                    data-target="#delete_{{ $lang->language_guid }}"
+                                <a href="#" data-toggle="modal" data-target="#delete_{{ $lang->language_guid }}"
                                     class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                     <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Trash.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                            viewBox="0 0 24 24" version="1.1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"></rect>
                                                 <path
@@ -95,8 +98,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Dil Detay</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -111,29 +113,35 @@
                                             <div class="form-group">
                                                 <label for="order" class="col-form-label">Dil Adı</label>
                                                 <input type="text" class="form-control" value="{{ $lang->name }}"
-                                                     name="name">
+                                                    name="name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Durumu</label>
+                                                <select class="form-control" name="is_active">
+                                                    <option {{ $lang->is_active == '1' ? 'selected' : '' }} value="1">Aktif
+                                                    </option>
+                                                    <option {{ $lang->is_active == '0' ? 'selected' : '' }} value="0">Pasif
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Kapat</button>
-                                            <button type="submit" value="submit"
-                                                class="btn btn-primary">Kaydet</button>
+                                            <button type="submit" value="submit" class="btn btn-primary">Kaydet</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="modal" id="delete_{{ $lang->language_guid }}" tabindex="-1"
-                            role="dialog">
+                        <div class="modal" id="delete_{{ $lang->language_guid }}" tabindex="-1" role="dialog">
                             <form action="{{ route('admin.language_delete') }}" method="POST">
                                 @csrf
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Seçilen Dili Sil</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -141,8 +149,7 @@
                                             <p><b>{{ $lang->name }}</b> dilini silmek istediğinize emin
                                                 misiniz?</p>
                                         </div>
-                                        <input type="hidden" name="language_guid"
-                                            value="{{ $lang->language_guid }}">
+                                        <input type="hidden" name="language_guid" value="{{ $lang->language_guid }}">
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-warning">Sil</button>
                                             <button type="button" class="btn btn-secondary"
@@ -156,15 +163,13 @@
 
                     <div class="modal fade" id="{{ $data['button']['id'] }}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <form action="{{ route('admin.language_add') }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('admin.language_add') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Dil Ekle</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -175,8 +180,18 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="name" class="col-form-label">Dil Adı</label>
-                                            <input type="text" class="form-control" name="name" min="0"
-                                                max="10000" step="1">
+                                            <input type="text" class="form-control" name="name" min="0" max="10000"
+                                                step="1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="flag" class="col-form-label">İçerik
+                                                Resmi</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="image"
+                                                    id="customFile1">
+                                                <label class="custom-file-label" for="customFile1">Resim
+                                                    Seçiniz</label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">

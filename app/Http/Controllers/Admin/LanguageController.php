@@ -15,7 +15,7 @@ class LanguageController extends Controller
         return $this->middleware('adminauth:admin');
     }
 
-public function home()
+    public function home()
     {
         $d['language'] = Language::orderBy('id', 'ASC')->paginate(10);
         $d['theme'] = Theme::where('id', 1)->first();
@@ -38,6 +38,11 @@ public function home()
         $lang->code = $r->code;
         $lang->name = $r->name;
         $lang->is_active = $r->is_active ?? 1;
+        if (!is_null($r->image)) {
+            $image_name = $r->file('image')->getClientOriginalName();
+            $r->file('image')->move(storage_path('app/public/flags/'), $image_name);
+            $lang->image = $image_name;
+        }
         $lang->save();
 
         return redirect()->back()->with('success', 'Dil başarıyla eklendi.');
@@ -53,6 +58,11 @@ public function home()
         $lang->code = $r->code;
         $lang->name = $r->name;
         $lang->is_active = $r->is_active ?? 1;
+        if (!is_null($r->image)) {
+            $image_name = $r->file('image')->getClientOriginalName();
+            $r->file('image')->move(storage_path('app/public/flags/'), $image_name);
+            $lang->image = $image_name;
+        }
         $lang->update();
 
         return redirect()->back()->with('success', 'Dil başarıyla güncellendi.');
