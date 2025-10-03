@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Models\SystemSetting;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -96,6 +98,44 @@ class ContactController extends Controller
                 Mail::to($mailaddr)->send(new DemoMail($array));
             } catch (\Throwable $th) {
                 //throw $th;
+            }
+
+            // Webhook servisine POST isteği gönder
+            try {
+                $webhookUrl = env('WEBHOOK_URL');
+                $webhookAuth = env('WEBHOOK_AUTH');
+                $customerId = env('WEBHOOK_CUSTOMER_ID');
+                $personId = env('WEBHOOK_PERSON_ID');
+
+                if ($webhookUrl && $webhookAuth && $customerId && $personId) {
+                    $notifyText = "
+Egeria ERP Demo Talebi
+Ad Soyad: {$r->name} {$r->surname}
+E-posta: {$r->email}
+Telefon: {$r->phone}
+Notlar: {$r->msg}
+                    ";
+
+                    $response = Http::withHeaders([
+                        'Authorization' => 'Basic ' . $webhookAuth,
+                        'Content-Type' => 'application/json',
+                    ])->post($webhookUrl, [
+                        'CustomerId' => $customerId,
+                        'PersonId' => $personId,
+                        'NotifyText' => trim($notifyText),
+                    ]);
+
+                    // Log webhook response (opsiyonel)
+                    if (!$response->successful()) {
+                        Log::warning('Webhook request failed', [
+                            'status' => $response->status(),
+                            'body' => $response->body()
+                        ]);
+                    }
+                }
+            } catch (\Throwable $th) {
+                // Webhook hatası uygulamayı durdurmaz
+                Log::error('Webhook error: ' . $th->getMessage());
             }
     
             $d['result'] = 200;
