@@ -56,6 +56,61 @@ class ContactController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
+            // Webhook servisine POST isteği gönder
+            try {
+                $webhookUrl = config('app.webhook_url');
+                $webhookAuth = config('app.webhook_auth');
+                $customerId = config('app.webhook_customer_id');
+                $personId = config('app.webhook_person_id');
+
+                Log::info('Webhook config check', [
+                    'webhook_url' => $webhookUrl ? 'SET' : 'NOT SET',
+                    'webhook_auth' => $webhookAuth ? 'SET' : 'NOT SET',
+                    'customer_id' => $customerId ? 'SET' : 'NOT SET',
+                    'person_id' => $personId ? 'SET' : 'NOT SET'
+                ]);
+
+                if ($webhookUrl && $webhookAuth && $customerId && $personId) {
+                    $notifyText = "egeria.com.tr İletişim Formu \n Ad Soyad: {$r->name} {$r->surname}\nE-posta: {$r->email}\nTelefon: {$r->phone}\nŞirket: {$r->company_name}\nNotlar: {$r->msg}";
+
+                    Log::info('Sending webhook request', [
+                        'url' => $webhookUrl,
+                        'notify_text' => $notifyText
+                    ]);
+
+                    $response = Http::withHeaders([
+                        'Authorization' => 'Basic ' . $webhookAuth,
+                        'Content-Type' => 'application/json',
+                        'User-Agent' => 'Laravel-Webhook/1.0'
+                    ])->post($webhookUrl, [
+                        'NotifyText' => $notifyText,
+                    ]);
+
+                    Log::info('Webhook response', [
+                        'status' => $response->status(),
+                        'body' => $response->body()
+                    ]);
+
+                    if (!$response->successful()) {
+                        Log::warning('Webhook request failed', [
+                            'status' => $response->status(),
+                            'body' => $response->body()
+                        ]);
+                    }
+                } else {
+                    Log::warning('Webhook configuration incomplete', [
+                        'webhook_url' => $webhookUrl ? 'SET' : 'NOT SET',
+                        'webhook_auth' => $webhookAuth ? 'SET' : 'NOT SET',
+                        'customer_id' => $customerId ? 'SET' : 'NOT SET',
+                        'person_id' => $personId ? 'SET' : 'NOT SET'
+                    ]);
+                }
+            } catch (\Throwable $th) {
+                // Webhook hatası uygulamayı durdurmaz
+                Log::error('Webhook error: ' . $th->getMessage(), [
+                    'trace' => $th->getTraceAsString()
+                ]);
+            }
 
         return redirect()->back()->with('success','İletişim talebiniz başarıyla alınmıştır.');
     }
@@ -116,7 +171,7 @@ class ContactController extends Controller
                 ]);
 
                 if ($webhookUrl && $webhookAuth && $customerId && $personId) {
-                    $notifyText = "Ad Soyad: {$r->name} {$r->surname}\nE-posta: {$r->email}\nTelefon: {$r->phone}\nŞirket: EGERIA\nNotlar: {$r->msg}";
+                    $notifyText = "egeria.com.tr Demo Talebi \n Ad Soyad: {$r->name} {$r->surname}\nE-posta: {$r->email}\nTelefon: {$r->phone}\nŞirket: EGERIA\nNotlar: {$r->msg}";
 
                     Log::info('Sending webhook request', [
                         'url' => $webhookUrl,
