@@ -103,40 +103,58 @@ class ContactController extends Controller
 
             // Webhook servisine POST isteği gönder
             try {
-                $webhookUrl = env('WEBHOOK_URL');
-                $webhookAuth = env('WEBHOOK_AUTH');
-                $customerId = env('WEBHOOK_CUSTOMER_ID');
-                $personId = env('WEBHOOK_PERSON_ID');
+                $webhookUrl = config('app.webhook_url');
+                $webhookAuth = config('app.webhook_auth');
+                $customerId = config('app.webhook_customer_id');
+                $personId = config('app.webhook_person_id');
+
+                Log::info('Webhook config check', [
+                    'webhook_url' => $webhookUrl ? 'SET' : 'NOT SET',
+                    'webhook_auth' => $webhookAuth ? 'SET' : 'NOT SET',
+                    'customer_id' => $customerId ? 'SET' : 'NOT SET',
+                    'person_id' => $personId ? 'SET' : 'NOT SET'
+                ]);
 
                 if ($webhookUrl && $webhookAuth && $customerId && $personId) {
-                    $notifyText = "
-Egeria ERP Demo Talebi
-Ad Soyad: {$r->name} {$r->surname}
-E-posta: {$r->email}
-Telefon: {$r->phone}
-Notlar: {$r->msg}
-                    ";
+                    $notifyText = "Ad Soyad: {$r->name} {$r->surname}\nE-posta: {$r->email}\nTelefon: {$r->phone}\nŞirket: EGERIA\nNotlar: {$r->msg}";
+
+                    Log::info('Sending webhook request', [
+                        'url' => $webhookUrl,
+                        'notify_text' => $notifyText
+                    ]);
 
                     $response = Http::withHeaders([
                         'Authorization' => 'Basic ' . $webhookAuth,
                         'Content-Type' => 'application/json',
+                        'User-Agent' => 'Laravel-Webhook/1.0'
                     ])->post($webhookUrl, [
-                        'CustomerId' => $customerId,
-                        'PersonId' => $personId,
-                        'NotifyText' => trim($notifyText),
+                        'NotifyText' => $notifyText,
                     ]);
 
-                    // Log webhook response (opsiyonel)
+                    Log::info('Webhook response', [
+                        'status' => $response->status(),
+                        'body' => $response->body()
+                    ]);
+
                     if (!$response->successful()) {
                         Log::warning('Webhook request failed', [
                             'status' => $response->status(),
                             'body' => $response->body()
                         ]);
                     }
+                } else {
+                    Log::warning('Webhook configuration incomplete', [
+                        'webhook_url' => $webhookUrl ? 'SET' : 'NOT SET',
+                        'webhook_auth' => $webhookAuth ? 'SET' : 'NOT SET',
+                        'customer_id' => $customerId ? 'SET' : 'NOT SET',
+                        'person_id' => $personId ? 'SET' : 'NOT SET'
+                    ]);
                 }
             } catch (\Throwable $th) {
                 // Webhook hatası uygulamayı durdurmaz
-                Log::error('Webhook error: ' . $th->getMessage());
+                Log::error('Webhook error: ' . $th->getMessage(), [
+                    'trace' => $th->getTraceAsString()
+                ]);
             }
     
             $d['result'] = 200;
