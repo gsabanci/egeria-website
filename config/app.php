@@ -80,6 +80,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Webhook Configuration
+    |--------------------------------------------------------------------------
+    |
+    | These settings are used for webhook integration.
+    |
+    */
+
+    'webhook_url' => env('WEBHOOK_URL', null),
+    'webhook_auth' => env('WEBHOOK_AUTH', null),
+    'webhook_customer_id' => env('WEBHOOK_CUSTOMER_ID', null),
+    'webhook_person_id' => env('WEBHOOK_PERSON_ID', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
