@@ -26,6 +26,7 @@ class ContactController extends Controller
         $d['offices']=Office::with('city')->where('lang_code', $lang)->where('is_active',1)->get();
         $d['page_title'] = 'İletişim';
         $d['shortlink_title'] = 'İletişim';
+        $d['google_maps_api_key'] = config('app.google_maps_api_key');
         return view('frontend.page.contact', $d);
     }
     public function send_form(Request $r)

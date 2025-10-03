@@ -52,7 +52,8 @@
     </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" defer></script>
+@if($google_maps_api_key)
+<script src="https://maps.googleapis.com/maps/api/js?key={{ $google_maps_api_key }}&callback=initMap" defer></script>
 <script defer>
     function initMap() {
     var center = { lat: 38.45453, lng: 27.1768 };
@@ -65,7 +66,15 @@
         // disableDefaultUI: true,
     });
     }
+@else
+<script defer>
+    function initMap() {
+        // API Key yoksa harita yerine mesaj göster
+        document.getElementById('map').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f5f5f5; color: #666; font-size: 16px;">Google Maps API Key tanımlanmamış</div>';
+    }
+@endif
 
+@if($google_maps_api_key)
     window.onload = function () {
         var marker = new google.maps.Marker({
         position: { lat: 38.45453, lng: 27.1768 },
@@ -91,4 +100,5 @@
 
     $('.c-office-card').first().trigger('click');
     }
+@endif
 </script>
