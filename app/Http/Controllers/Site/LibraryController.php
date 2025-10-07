@@ -49,7 +49,7 @@ class LibraryController extends Controller
     {
         $lang = App::getLocale();
 
-        $lib_detail = Library::where('library_category_slug', $slug)->where('lang_code', $lang)->where("is_active", "1")->first();
+        $lib_detail = Library::where('slug', $slug)->where('lang_code', $lang)->where("is_active", "1")->first();
         if (is_null($lib_detail)) {
             return redirect()->back();
         }
