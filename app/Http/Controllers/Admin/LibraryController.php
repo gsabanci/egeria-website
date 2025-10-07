@@ -46,7 +46,7 @@ class LibraryController extends Controller
         $lib = new Library();
         $lib->library_guid = Str::uuid();
         $lib->title = $r->title;
-        $lib->slug = Str::slug($r->title);
+        $lib->slug = $r->slug;
         $lib->library_category_slug = $r->library_category_slug;
         $lib->short_desc = $r->short_desc;
         $lib->long_desc = $r->long_desc;
@@ -78,7 +78,7 @@ class LibraryController extends Controller
         }
 
         $lib->title = $r->title;
-        $lib->slug = Str::slug($r->title);
+        $lib->slug = $r->slug;
         $lib->library_category_guid = $r->library_category_guid;
         $lib->short_desc = $r->short_desc;
         $lib->long_desc = $r->long_desc;

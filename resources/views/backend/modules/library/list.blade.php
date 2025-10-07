@@ -244,12 +244,18 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
+                                              <div class="form-group col-4">
+                                            <label for="recipient-name" class="col-form-label">Tanımlayıcı(URL Başlığı)</label>
+                                            <input type="text" class="form-control" name="slug">
+                                            <small class="form-text text-muted">
+                                                Not: Bu alan diller arasında ortak bir anahtardır (ID gibi). Aynı içeriğin farklı dilleri için aynı slug kullanılmalıdır</small>
+                                        </div>
                                             <div class="form-group col-4">
                                                 <label for="recipient-name" class="col-form-label">Döküman
                                                     Başlığı</label>
                                                 <input type="text" class="form-control" name="title">
                                             </div>
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-2">
                                                 <label for="recipient-name" class="col-form-label">Döküman
                                                     Kategorisi Seçiniz</label>
                                                 <select class="form-control" name="library_category_slug">
@@ -268,15 +274,15 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                            <div class="form-group col-2">
+                                        </div>
+                                        <div class="row">
+                                                <div class="form-group col-2">
                                                 <label for="recipient-name" class="col-form-label">Durumu</label>
                                                 <select class="form-control" name="is_active">
                                                     <option value="1">Aktif</option>
                                                     <option value="0">Pasif</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="form-group col-4">
                                                 <label for="recipient-name" class="col-form-label">Kapak
                                                     Resmi</label>
@@ -296,7 +302,7 @@
                                                         Seçiniz</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-2">
                                                 <label for="recipient-name" class="col-form-label">Görüntülenme
                                                     Sırası</label>
                                                 <input type="number" class="form-control" min="0"

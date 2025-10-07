@@ -41,7 +41,7 @@
                                         <a href="{{ asset('storage/library/file/' . $lib_detail->docname) }}"
                                             download="{{ asset('storage/library/file/' . $lib_detail->docname) }}"
                                             class="c-button c-button--primary c-button--sm-w c-button--sm mt-3">
-                                            Dökümanı İndir
+                                            {{  strip_tags( optional($static_texts->get('dokumani-indir-metni'))->value) }}
                                         </a>
                                     </div>
                                 </diw>
