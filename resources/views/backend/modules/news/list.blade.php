@@ -39,7 +39,7 @@
                             <td>#{{ $n->id }}</td>
                             <td>
                                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $n->title }}</span>
-                                <span class="text-muted font-weight-bold"></span>
+                                <span class="text-muted font-weight-bold">{{ $n->slug }}</span>
                             </td>
                             <td><span
                                     class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ !is_null($n->category) ? $n->category->name : '-' }}</span>
@@ -159,6 +159,14 @@
                                                 </div>
                                             </div> --}}
                                             <div class="col-lg-12 col-md-12 form-group">
+                                                <div class="form-group">
+                                                    <label for="slug" class="col-form-label">Tanımlayıcı(URL Başlığı)</label>
+                                                    <input type="text" class="form-control" name="slug">
+                                                    <small class="form-text text-muted">
+                                                        Not: Bu alan diller arasında ortak bir anahtardır (ID gibi).
+                                                        Aynı içeriğin farklı dilleri için aynı slug
+                                                        kullanılmalıdır</small>
+                                                </div>
                                                 <div class="form-group">
                                                     <label for="recipient-name" class="col-form-label">Haber
                                                         Başlığı</label>
