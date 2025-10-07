@@ -55,7 +55,7 @@ class NewsController extends Controller
         $news=new News();
         $news->news_guid=Str::uuid();
         $news->title=$r->title;
-        $news->slug=Str::slug($r->title);
+        $news->slug=$r->slug;
         $news->lang_code = $r->lang_code;
         $news->short_desc=$r->short_desc;
         $news->detail=$r->detail;
@@ -83,7 +83,7 @@ class NewsController extends Controller
     {
         $update=News::where('news_guid',$r->news_guid)->first();
         $update->title=$r->title;
-        $update->slug=Str::slug($r->title);
+        $update->slug=$r->slug;
         $update->short_desc=$r->short_desc;
         $update->nc_guid = $r->nc_guid;
         $update->detail=$r->detail;
