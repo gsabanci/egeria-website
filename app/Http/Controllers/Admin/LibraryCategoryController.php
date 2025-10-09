@@ -56,7 +56,7 @@ class LibraryCategoryController extends Controller
         }
 
         $category->title = $r->title;
-        $category->slug = Str::slug($r->title);
+        $category->slug = $r->slug;
         $category->order = !is_null($r->order) ? $r->order : $allCatCount + 1;
         $category->update();
 
