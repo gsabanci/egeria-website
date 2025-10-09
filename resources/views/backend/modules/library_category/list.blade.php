@@ -108,6 +108,12 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                               <div class="form-group">
+                                            <label for="slug" class="col-form-label">Tanımlayıcı(URL Başlığı)</label>
+                                            <input type="text" class="form-control" name="slug" value="{{ $c->slug }}" required>
+                                             <small class="form-text text-muted">
+                                                Not: Bu alan diller arasında ortak bir anahtardır (ID gibi). Aynı içeriğin farklı dilleri için aynı slug kullanılmalıdır</small>
+                                        </div>
                                             <div class="form-group">
                                                 <label for="title" class="col-form-label">Kategori Adı</label>
                                                 <input type="text" class="form-control" value="{{ $c->title }}"

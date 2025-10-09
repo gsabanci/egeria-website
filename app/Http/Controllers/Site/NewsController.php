@@ -29,8 +29,8 @@ class NewsController extends Controller
         $lang = App::getLocale();
 
         $category = NewsCategory::where('slug', $slug)
-                  ->where('lang_code', $lang)
-                  ->first();
+            ->where('lang_code', $lang)
+            ->first();
         if (is_null($category)) {
             return redirect()->back();
         }
@@ -38,8 +38,17 @@ class NewsController extends Controller
         $d["is_main"] = false;
         $d['news_cat_title'] = $category->name;
         $d['news_categories'] = NewsCategory::get();
-        $d['nc_guid'] = $category->nc_guid;
-        $d['news'] = News::where("nc_guid", $category->nc_guid)->orderBy('queue', 'asc')->orderBy("created_at", "DESC")->paginate(12);
+        $d['news'] = News::where('lang_code', $lang)
+            ->whereIn(
+                'nc_guid',
+                NewsCategory::select('nc_guid')
+                    ->where('slug', $slug)
+                    ->where('lang_code', $lang)
+            )
+            ->orderBy('queue', 'asc')
+            ->orderBy('created_at', 'DESC')->get();
+        // $d['nc_guid'] = $category->nc_guid;
+        // $d['news'] = News::where("nc_guid", $category->nc_guid)->orderBy('queue', 'asc')->orderBy("created_at", "DESC")->paginate(12);
         return view('frontend.page.news', $d);
     }
 
