@@ -27,6 +27,7 @@
                     <tr class="text-left">
                         <th style="max-width: 10px">ID</th>
                         <th style="min-width: 200px">Dil Kodu</th>
+                        <th style="min-width: 140px">Görsel</th>
                         <th style="min-width: 200px">Durumu</th>
                         <th class="pr-0 text-right" style="min-width: 160px">İşlemler</th>
                     </tr>
@@ -39,7 +40,16 @@
                                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{ $lang->name }}</span>
                                 <span class="text-muted font-weight-bold">{{ $lang->code }}</span>
                             </td>
-                              <td>
+                            <td>
+                                @if(!empty($lang->image))
+                                  <img src="{{ asset('storage/flags/' . ltrim($lang->image, '/')) }}"  alt="{{ $lang->name }}"
+                                     width="28" height="20"  style="object-fit:cover;border-radius:4px;border:1px solid rgba(0,0,0,.08);" >
+                                <span class="text-muted ml-2 small">{{ $lang->image }}</span>
+                                @else
+                                    <span class="text-muted">—</span>
+                                 @endif
+                            </td>
+                            <td>
                                 @if($lang->is_active == '1')
                                     <span class="label label-lg label-light-success label-inline">Aktif</span>
                                 @else
@@ -124,6 +134,26 @@
                                                     </option>
                                                 </select>
                                             </div>
+                                            <div class="form-group">
+                         <label class="col-form-label">Mevcut Görsel</label><br>
+                     @if(!empty($lang->image))
+                        <img src="{{ asset('storage/flags/' . ltrim($lang->image, '/')) }}"
+                      alt="{{ $lang->name }}"
+                         width="40" height="28"
+                             style="object-fit:cover;border-radius:4px;border:1px solid rgba(0,0,0,.08);">
+                        <span class="text-muted ml-2 small">{{ $lang->image }}</span>
+                     @else
+                    <span class="text-muted">—</span>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label">Yeni Görsel</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="image" id="langEditFile_{{ $lang->language_guid }}">
+                            <label class="custom-file-label" for="langEditFile_{{ $lang->language_guid }}">Resim Seçiniz</label>
+                        </div>
+                </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
