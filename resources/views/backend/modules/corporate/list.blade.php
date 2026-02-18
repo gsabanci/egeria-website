@@ -325,7 +325,7 @@
                                                     Resmi</label>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="image"
-                                                        id="customFile" required>
+                                                        id="customFile">
                                                     <label class="custom-file-label" for="customFile">Resim
                                                         Seçiniz</label>
                                                 </div>
@@ -333,8 +333,7 @@
                                             <div class="form-group col-6">
                                                 <label for="recipient-name" class="col-form-label">Döküman</label>
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="docname"
-                                                        required>
+                                                    <input type="file" class="custom-file-input" name="docname">
                                                     <label class="custom-file-label" for="customFile">Döküman
                                                         Seçiniz</label>
                                                 </div>
