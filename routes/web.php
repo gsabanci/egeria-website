@@ -11,6 +11,7 @@ use App\Http\Controllers\Site\ServiceController;
 use App\Http\Controllers\Site\IndustryController;
 use App\Http\Controllers\Site\LibraryController;
 use App\Http\Controllers\Site\ReferenceController;
+use App\Http\Controllers\Site\CorporateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ use App\Http\Controllers\Site\ReferenceController;
 
 Route::any('/', [HomeController::class, 'index'])->name('homepage');
 
+Route::any('/kurumsal/{slug}',[CorporateController::class,'corporate_detail'])->name('corporate_detail');
 Route::any('/cozumler/{slug}',[ServiceController::class,'service_detail'])->name('service_detail');
 Route::any('/sektorler/{slug}',[IndustryController::class,'industry_detail'])->name('industry_detail');
 Route::get('/hizmetler/{slug}', [LaborController::class, 'labor_detail'])->name('labor_detail');

@@ -11,6 +11,16 @@
             </a>
             <div class="c-navbar__menu l-navbar__menu l-navbar__menu-links d-none d-lg-flex">
                 <ul class="navbar-nav ml-auto">
+                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
+                        <a class="nav-link dropdown-toggle" href="#" id="corporate" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['kurumsal'] }}</a>
+                        <div class="dropdown-menu" aria-labelledby="corporate">
+                            @foreach ($corporates as $corporate)
+                                <a class="dropdown-item"
+                                    href="{{ route('corporate_detail', ['slug' => $corporate->slug]) }}">{{ $corporate->title }}</a>
+                            @endforeach
+                        </div>
+                    </li>
                     <li class="nav-item c-navbar__menu-item l-navbar__menu-item l-navbar__menu-item--has-mega">
                         <a class="nav-link dropdown-toggle" href="#" id="solutions" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"> {{ $menuCategories['cozumler'] }}</a>

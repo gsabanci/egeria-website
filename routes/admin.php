@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CorporateController;
 use App\Http\Controllers\Admin\LanguageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
@@ -42,9 +43,15 @@ Route::get('/categories', [CategoryController::class, 'home'])->name('admin.cate
 Route::post('/category-add', [CategoryController::class, 'category_add'])->name('admin.category_add');
 Route::post('/category-update/{c_guid}', [CategoryController::class, 'category_update'])->name('admin.category_update');
 Route::post('/category-delete/{c_guid}', [CategoryController::class, 'category_delete'])->name('admin.category_delete');
+
+//Kurumsal
+Route::get('/corporate', [CorporateController::class, 'home'])->name('admin.corporate');
+Route::post('/corporate-add', [CorporateController::class, 'corporate_add'])->name('admin.corporate_add');
+Route::post('/corporate-update', [CorporateController::class, 'corporate_edit'])->name('admin.corporate_edit');
+Route::post('/corporate-delete', [CorporateController::class, 'corporate_delete'])->name('admin.corporate_delete');
+
 //Servisler
 Route::get('/services', [ServiceController::class, 'home'])->name('admin.services');
-//SERVİS EKLE
 Route::post('/service-add', [ServiceController::class, 'service_add'])->name('admin.service_add');
 Route::post('/service-edit/{service_guid}', [ServiceController::class, 'service_edit'])->name('admin.service_edit');
 Route::post('/service-delete/{service_guid}', [ServiceController::class, 'service_delete'])->name('admin.service_delete');

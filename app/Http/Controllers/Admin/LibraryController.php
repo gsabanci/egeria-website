@@ -15,10 +15,6 @@ class LibraryController extends Controller
     {
         return $this->middleware('adminauth:admin');
     }
-
-    /**
-     * Kütüphane Listesi
-     */
     public function home()
     {
         $d['library_categories'] = LibraryCategory::where('lang_code', 'tr')->get();
@@ -37,10 +33,6 @@ class LibraryController extends Controller
 
         return view('backend.pages.libraries', $d);
     }
-
-    /**
-     * Döküman Ekle
-     */
     public function add(Request $r)
     {
         $lib = new Library();
@@ -66,10 +58,6 @@ class LibraryController extends Controller
 
         return redirect()->back()->with('success', 'Döküman başarıyla eklendi.');;
     }
-
-    /**
-     * Döküman Düzenle
-     */
     public function update(Request $r)
     {
         $lib = Library::where("library_guid", $r->library_guid)->first();
@@ -101,10 +89,6 @@ class LibraryController extends Controller
 
         return redirect()->back()->with('success', 'Döküman başarıyla güncellendi.');;
     }
-
-    /**
-     * Döküman Sil
-     */
     public function delete(Request $r)
     {
         $lib = Library::where("library_guid", $r->library_guid)->first();

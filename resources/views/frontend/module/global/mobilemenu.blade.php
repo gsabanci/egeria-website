@@ -11,6 +11,17 @@
             </div>
             <ul class="c-mobile-menu__list--main c-mobile-menu__list">
                 <li class="c-mobile-menu__list-item">
+                    <span>{{ $menuCategories['kurumsal'] }}</span>
+                    <ul class="c-mobile-menu__list-item-sub">
+                        <!-- <a href="{{ route('news') }}">Tüm Haberler</a> -->
+                        @foreach ($corporates as $corporate)
+                            <a href="{{ route('corporate_detail', ['slug' => $corporate->slug]) }}">
+                                <li>{{ $corporate->title }}</li>
+                            </a>
+                        @endforeach
+                    </ul>
+                </li>
+                <li class="c-mobile-menu__list-item">
                     <span>{{ optional($static_texts->get('cozumler'))->value }}</span>
                     <ul class="c-mobile-menu__list-item-sub">
                         @foreach ($all_services as $s)
@@ -28,8 +39,6 @@
                                 <li>{{ $industry->name }}</li>
                             </a>
                         @endforeach
-
-
                     </ul>
                 </li>
                 <li class="c-mobile-menu__list-item">
@@ -41,8 +50,6 @@
                                 <li>{{ $nc->name }}</li>
                             </a>
                         @endforeach
-
-
                     </ul>
                 </li>
                 <li class="c-mobile-menu__list-item">
@@ -76,8 +83,8 @@
                     </a>
                 </li>
                 <li class="c-mobile-menu__list-item">
-                    <a href="#modalComponent" class="c-button c-button--sm c-button--sm-w c-button--elevate-green" data-toggle="modal"
-                        data-target="#modalComponent">{{ $menuCategories['demo-talep-et'] }}</a>
+                    <a href="#modalComponent" class="c-button c-button--sm c-button--sm-w c-button--elevate-green"
+                        data-toggle="modal" data-target="#modalComponent">{{ $menuCategories['demo-talep-et'] }}</a>
                 </li>
                 <li class="c-mobile-menu__list-item">
                     <a href="">

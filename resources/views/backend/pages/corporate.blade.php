@@ -1,0 +1,10 @@
+@extends('backend.layouts.master')
+@section('title', 'Kurumsal - Yönetici Paneli')
+
+@section('content')
+    <div class="row">
+        <div class="col-xl-12">
+            @include('backend.modules.corporate.list')
+        </div>
+    </div>
+@endsection

@@ -24,7 +24,7 @@ use App\Models\Language;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Controllers\Admin\JobApplyController;
 use App\Models\LibraryCategory;
-
+use App\Models\Corporate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -113,6 +113,9 @@ class AppServiceProvider extends ServiceProvider
 
         $kariyer_alt_baslik = Setting::where('slug', 'kariyer-alt-baslik')->where('lang_code', $lang)->first();
         view()->share('kariyer_alt_baslik', $kariyer_alt_baslik);
+
+        $corporates = Corporate::where('lang_code', $lang)->orderBy('queue')->get();
+        view()->share('corporates', $corporates);
 
         $services = Service::where('lang_code', $lang)->orderBy('queue')->get();
         view()->share('all_services', $services);

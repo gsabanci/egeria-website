@@ -49,6 +49,12 @@
                         <span class="menu-text">Kategoriler</span>
                     </a>
                 </li>
+                  <li class="menu-item" aria-haspopup="true">
+                    <a href="{{ route('admin.corporate') }}" class="menu-link">
+                        <i class="menu-icon flaticon2-layers-1"></i>
+                        <span class="menu-text">Kurumsal</span>
+                    </a>
+                </li>
                 <li class="menu-item" aria-haspopup="true">
                     <a href="{{ route('admin.services') }}" class="menu-link">
                         <i class="menu-icon flaticon2-layers-1"></i>
@@ -91,7 +97,6 @@
                         <span class="menu-text">İş Kategorileri</span>
                     </a>
                 </li>
-
                 <li class="menu-item" aria-haspopup="true">
                     <a href="{{ route('admin.jobapplies') }}" class="menu-link">
                         <i class="menu-icon flaticon2-avatar"></i>
