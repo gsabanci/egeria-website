@@ -42,13 +42,18 @@ class CorporateController extends Controller
         $corporate->queue = $r->queue;
         $corporate->status = $r->status;
 
-        $coverimg = $r->file('image')->getClientOriginalName();
-        $r->file('image')->move(storage_path('app/public/corporate/cover/'), $coverimg);
-        $corporate->image = $coverimg;
+        if ($r->hasFile('image')) {
+            $coverimg = $r->file('image')->getClientOriginalName();
+            $r->file('image')->move(storage_path('app/public/corporate/cover/'), $coverimg);
+            $corporate->image = $coverimg;
+        }
 
-        $docfile = $r->file('docname')->getClientOriginalName();
-        $r->file('docname')->move(storage_path('app/public/corporate/file/'), $docfile);
-        $corporate->docname = $docfile;
+        if ($r->hasFile('docname')) {
+            $docfile = $r->file('docname')->getClientOriginalName();
+            $r->file('docname')->move(storage_path('app/public/corporate/file/'), $docfile);
+            $corporate->docname = $docfile;
+        }
+
 
         $corporate->save();
 
