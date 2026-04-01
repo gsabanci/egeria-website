@@ -3,7 +3,7 @@
         <div class="c-copyright__row">
             <div class="c-copyright__left">
                 @foreach($policies as $pol)
-                    <div data-toggle="modal" data-target="#{{ $pol->slug . '-modal' }}">{{ $pol->title }}</div>
+                    <a href="{{ route('policy_detail', ['slug' => $pol->slug]) }}">{{ $pol->title }}</a>
                 @endforeach
             </div>
             <div class="c-copyright__right">

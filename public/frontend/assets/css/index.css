@@ -1666,15 +1666,15 @@ h2.c-section__title--sm {
   align-items: center;
   color: var(--color-white);
 }
-.c-copyright__left div:not(:last-child) {
-  margin-right: 3.75rem;
+.c-copyright__left a:not(:last-child) {
+  margin-right: 3rem;
 }
 @media (max-width: 500px) {
-  .c-copyright__left div:not(:last-child) {
-    margin-right: rem;
+  .c-copyright__left a:not(:last-child) {
+    margin-right: 0rem;
   }
 }
-.c-copyright__left div:hover {
+.c-copyright__left a:hover {
   text-decoration: underline !important;
   cursor: pointer;
 }

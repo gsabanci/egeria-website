@@ -12,6 +12,7 @@ use App\Http\Controllers\Site\IndustryController;
 use App\Http\Controllers\Site\LibraryController;
 use App\Http\Controllers\Site\ReferenceController;
 use App\Http\Controllers\Site\CorporateController;
+use App\Http\Controllers\Site\PolicyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,7 @@ Route::get('/kurumsal',[PageController::class,'aboutus'])->name('aboutus');
 Route::get('/kariyer',[CareerController::class,'home'])->name('career');
 Route::get('/kariyer-detay/{slug}',[CareerController::class,'filter'])->name('filter');
 
-Route::get('/sozlesme/{slug}',[PageController::class,'policy_detail'])->name('policy_detail');
+Route::get('/sozlesme/{slug}',[PolicyController::class,'policy_detail'])->name('policy_detail');
 
 Route::get('/is-basvuru-formu/{slug}',[CareerController::class,'detail'])->name('job_detail');
 

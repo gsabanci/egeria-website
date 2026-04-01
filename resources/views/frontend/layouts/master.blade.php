@@ -35,9 +35,10 @@
     <link href="{{ asset('frontend/assets/css/slick-theme.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/assets/css/index.css') }}" rel="stylesheet" />
     <link href="{{ asset('frontend/assets/css/custom.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/assets/css/cookie-consent.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/assets/css/select2.min.css') }}" rel="stylesheet" />
     <!-- <link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css"/> -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT5RMVK453"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-BT5RMVK453"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -47,7 +48,7 @@
         gtag('js', new Date());
 
         gtag('config', 'G-BT5RMVK453');
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -118,12 +119,12 @@
     @endsection
     @yield('js')
     <script>
-        var onloadCallback = function() {
+        var onloadCallback = function () {
             if (!RECAPTCHA_SITE_KEY) {
                 console.warn('reCAPTCHA Site Key not configured');
                 return;
             }
-            
+
             var cc = $('#contactCaptcha')
             if (cc.length > 0) {
                 grecaptcha.render(document.getElementById('contactCaptcha'), {
@@ -144,7 +145,7 @@
             });
         };
 
-        var demoCaptchaCallback = function(d) {
+        var demoCaptchaCallback = function (d) {
             if (d == undefined) {
                 $('#recapVal').val("error").click();
             } else if (d.length != 0) {
@@ -154,7 +155,7 @@
             }
         }
 
-        var contactCaptchaCallback = function(d) {
+        var contactCaptchaCallback = function (d) {
             if (d == undefined) {
                 $('.contactButton').attr('type', 'button');
             } else if (d.length != 0) {
@@ -164,7 +165,7 @@
             }
         }
 
-        var careerCaptchaCallback = function(d) {
+        var careerCaptchaCallback = function (d) {
             if (d == undefined) {
                 $('.contactButton').attr('type', 'button');
             } else if (d.length != 0) {
@@ -192,6 +193,15 @@
             toastr.error(errorAlert)
         }
     </script>
+    <script>
+        window.cookieConsentConfig = {
+            gaMeasurementId: "G-BT5RMVK453"
+        };
+    </script>
+
+    @include('partials.cookie-consent')
+
+    <script src="{{ asset('frontend/assets/js/cookie-consent.js') }}"></script>
 </body>
 
 </html>

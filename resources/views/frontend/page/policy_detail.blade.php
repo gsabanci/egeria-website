@@ -2,7 +2,7 @@
 @section('title', $page_title)
 
 @section('content')
-    @include('frontend.module.corporate.title')
+    @include('frontend.module.policy.title')
 
     <!-- main content -->
     <section class="c-section c-section--sm">
@@ -12,35 +12,9 @@
 
                     <div class="c-giant-card">
                         <div class="row align-items-center">
-
-                            <div class="{{ !empty($corporate_detail->image) ? 'col-lg-7' : 'col-lg-12' }} mb-4 mb-lg-0">
-                                <div class="c-giant-card__content">
-                                    {!! $corporate_detail->content !!}
+                              <div class="c-giant-card__content">
+                                    {!! $policy_detail->content !!}
                                 </div>
-
-                                @if(!empty($corporate_detail->docname))
-                                    <div class="row mt-3">
-                                        <div class="col-lg-5 col-sm-7 col-12">
-                                            <a href="{{ asset('storage/corporate/file/' . $corporate_detail->docname) }}"
-                                                download class="c-button c-button--primary c-button--sm-w c-button--sm">
-                                                {{ strip_tags(optional($static_texts->get('dokumani-indir-metni'))->value ?? 'Dokümanı İndir') }}
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-
-                            @if(!empty($corporate_detail->image))
-                                <div class="col-lg-5">
-                                    <div class="h-100 d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid"
-                                            src="{{ asset('storage/corporate/cover/' . $corporate_detail->image) }}"
-                                            alt="{{ $corporate_detail->title ?? 'Corporate' }}" style="border-radius:16px; box-shadow:0 18px 45px rgba(0,0,0,.10);
-                                      width:100%; max-width:520px; height:320px; object-fit:cover;">
-                                    </div>
-                                </div>
-                            @endif
-
                         </div>
                     </div>
 
@@ -50,7 +24,7 @@
     </section>
 
     <!-- slider section -->
-    <section class="c-section">
+    <!-- <section class="c-section">
         <div class="container">
             <div class="row">
                 <div class="col-1 d-none d-sm-flex align-items-center justify-content-center">
@@ -94,5 +68,5 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 @endsection

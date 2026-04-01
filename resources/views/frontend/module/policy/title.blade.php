@@ -8,14 +8,14 @@
                     <a href="/">Egeria</a> <span>/</span>
                 </div>  
                 <div class="c-breadcrumb__item">
-                     {{ optional($static_texts->get('kurumsal'))->value }}<span>/</span> 
+                    {{ optional($static_texts->get('politikalar'))->value }} <span>/</span> 
                 </div>  
                 <div class="c-breadcrumb__item c-breadcrumb__item--last">
-                    {{ $corporate_detail->title }}
+                    {{ $policy_detail->title }}
                 </div>
             </div>
             <div class="c title">
-                <h2 class="c-title__heading">{{ $corporate_detail->title }}</h2>
+                <h2 class="c-title__heading">{{ $policy_detail->title }}</h2>
             </div>
             </div>
         </div>
