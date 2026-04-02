@@ -117,7 +117,7 @@
 }
 
 .cookie-consent__panel-text a.cookie-consent__policy-link {
-  color: var(--color-purple) !important;
+  color: #4C1D95 !important;
   text-decoration: underline !important;
 }
 
@@ -161,8 +161,8 @@
 .cookie-consent__row-status {
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-purple);
-  background: color-mix(in srgb, var(--color-purple) 12%, transparent);
+  color: #4C1D95;
+  background: color-mix(in srgb, #4C1D95 12%, transparent);
   padding: 6px 12px;
   border-radius: 999px;
 }
@@ -199,25 +199,25 @@
 
 /* PRIMARY (Tümünü kabul et) */
 .cookie-consent__btn--primary {
-  background: var(--color-purple);
+  background: #4C1D95;
   color: #fff !important;
-  border: 1px solid var(--color-purple);
+  border: 1px solid #4C1D95;
 }
 
 .cookie-consent__btn--primary:hover {
-  background: color-mix(in srgb, var(--color-purple) 85%, black);
+  background: color-mix(in srgb, #4C1D95 85%, black);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* SECONDARY (Tercihleri yönet) */
 .cookie-consent__btn--secondary {
   background: transparent;
-  color: var(--color-purple);
-  border: 1px solid var(--color-purple);
+  color: #4C1D95;
+  border: 1px solid #4C1D95;
 }
 
 .cookie-consent__btn--secondary:hover {
-  background: color-mix(in srgb, var(--color-purple) 10%, transparent);
+  background: color-mix(in srgb, #4C1D95 10%, transparent);
 }
 
 /* GHOST (Reddet) */
@@ -273,7 +273,7 @@
 }
 
 .cookie-consent__switch:checked+.cookie-consent__switch-slider {
-  background: var(--color-purple) !important;
+  background: #4C1D95 !important;
 }
 
 .cookie-consent__switch:checked+.cookie-consent__switch-slider::before {
