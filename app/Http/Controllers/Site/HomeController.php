@@ -34,7 +34,7 @@ class HomeController extends Controller
                 $d['staff'] = Staff::where('is_active', '1')->orderBy('queue', 'ASC')->get();
             }
             $d['news'] = News::where('lang_code', $lang)->orderBy('queue', 'asc')->orderBy('created_at', 'DESC')->paginate(12);
-            $d['offices'] = Office::with('city')->where('lang_code', $lang)->where('is_active', 1)->get();
+            $d['offices'] = Office::with('city')->where('lang_code', $lang)->where('is_active', 1)->orderBy('queue', 'asc')->get();
             $d['aboutus_cards'] = AboutusCard::where('lang_code', $lang)->get();
             $d['languages'] = Language::where('is_active', 1)->get();
             return view('frontend.page.dashboard', $d);
@@ -43,7 +43,7 @@ class HomeController extends Controller
             $d['references'] = Reference::orderBy('queue', 'ASC')->where('is_active', '1')->get();
             $d['staff'] = Staff::where('is_active', '1')->orderBy('queue', 'ASC')->get();
             $d['news'] = News::where('lang_code', $lang)->orderBy('queue', 'asc')->orderBy('created_at', 'DESC')->paginate(12);
-            $d['offices'] = Office::with('city')->where('lang_code', $lang)->where('is_active', 1)->get();
+            $d['offices'] = Office::with('city')->where('lang_code', $lang)->where('is_active', 1)->orderBy('queue', 'asc')->get();
             $d['aboutus_cards'] = AboutusCard::where('lang_code', $lang)->get();
             $d['languages'] = Language::where('is_active', 1)->get();
             return view('frontend.page.dashboard', $d);
