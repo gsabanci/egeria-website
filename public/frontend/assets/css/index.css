@@ -1666,11 +1666,13 @@ h2.c-section__title--sm {
   align-items: center;
   flex-wrap: wrap;
   color: var(--color-white);
-}
-.c-copyright__left a:not(:last-child) {
-  margin-right: 3rem;
+  gap: 1rem 2rem;
 }
 @media (max-width: 500px) {
+  .c-copyright__left {
+    gap: 0.5rem 3.5rem;
+    flex-wrap: wrap;
+  }
   .c-copyright__left a:not(:last-child) {
     margin-right: 0rem;
   }
