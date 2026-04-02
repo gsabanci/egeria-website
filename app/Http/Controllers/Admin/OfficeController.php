@@ -36,10 +36,10 @@ class OfficeController extends Controller
     }
     public function office_add(Request $r)
     {
-        $check=office::where('title',$r->title)->first();
-        if (!is_null($check)) {
-        return redirect()->back()->with('error','Girdiğiniz isimde Ofisiniz bulunmaktadır.');
-        }
+        // $check=office::where('title',$r->title)->first();
+        // if (!is_null($check)) {
+        // return redirect()->back()->with('error','Girdiğiniz isimde Ofisiniz bulunmaktadır.');
+        // }
         $office=new office();
         $office->office_guid=Str::uuid();
         $office->title=$r->title;
