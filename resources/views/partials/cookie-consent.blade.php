@@ -44,7 +44,7 @@
                                 <span class="cookie-consent__row-left">
                                     <h5>{!! optional($static_texts->get('zorunlu-cerezler'))->value !!}</h5>
                                 </span>
-                                <span class="cookie-consent__row-status">{!! optional($static_texts->get('her-zaman-etkin'))</span>
+                                <span class="cookie-consent__row-status">{!! optional($static_texts->get('her-zaman-etkin'))->value !!}</span>
                             </div>
                             <div class="cookie-consent__row-content">
                              {!! optional($static_texts->get('zorunlu-cerezler-aciklama'))->value !!}
