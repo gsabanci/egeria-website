@@ -16,44 +16,75 @@ class SetLanguage
             return $next($request);
         }
 
-        $validLangs = Language::pluck('code')->toArray(); // ['tr', 'en', ...]
+        $validLangs = Language::pluck('code')->toArray();
+        $host = $request->getHost();
 
+        $defaultLang = $this->getDefaultLangByHost($host, $validLangs);
+
+        // domain bazlı session key
+        $sessionKey = 'lang_' . md5($host);
+
+        $lang = null;
+
+        // 1) URL'de lang varsa onu kullanıyoruz
         if ($request->has('lang')) {
             $lang = $request->get('lang');
 
             if (!in_array($lang, $validLangs)) {
-                $lang = 'tr';
+                $lang = $defaultLang;
             }
 
-            App::setLocale($lang);
-            Session::put('lang', $lang);
+            Session::put($sessionKey, $lang);
 
-            // Eğer seçilen dil Türkçeyse, lang parametresini URL'den kaldır
+            App::setLocale($lang);
+
+            // sadece tr ise URL'den kaldırıyoruz SEO için
             if ($lang === 'tr') {
-                $currentUrl = $request->url(); // sadece domain + path
                 $query = $request->query();
                 unset($query['lang']);
-                return redirect()->to($currentUrl . (count($query) ? '?' . http_build_query($query) : ''));
-            }
-        } else {
-            // lang parametresi yoksa session'dan al
-            $lang = Session::get('lang', 'tr');
 
-            if (!in_array($lang, $validLangs)) {
-                $lang = 'tr';
+                return redirect()->to(
+                    $request->url() . (count($query) ? '?' . http_build_query($query) : '')
+                );
             }
 
-            App::setLocale($lang);
+            return $next($request);
+        }
 
-            // Eğer dil tr değilse ve URL'de lang yoksa, lang ekle
-            if ($lang !== 'tr') {
-                $currentUrl = $request->url();
-                $query = array_merge($request->query(), ['lang' => $lang]);
-                return redirect()->to($currentUrl . '?' . http_build_query($query));
-            }
+        // 2) URL'de lang yoksa bazlı session'dan alıyoruz
+        $lang = Session::get($sessionKey);
+
+        if (!$lang || !in_array($lang, $validLangs)) {
+            $lang = $defaultLang;
+            Session::put($sessionKey, $lang);
+        }
+
+        App::setLocale($lang);
+
+        // 3) tr değilse URL'de lang zorunlu olsun
+        if ($lang !== 'tr') {
+            $query = $request->query();
+            $query['lang'] = $lang;
+
+            return redirect()->to(
+                $request->url() . '?' . http_build_query($query)
+            );
         }
 
         return $next($request);
+    }
+
+    private function getDefaultLangByHost(string $host, array $validLangs): string
+    {
+        if (str_ends_with($host, '.bg')) {
+            return in_array('bg', $validLangs) ? 'bg' : 'en';
+        }
+
+        if (str_ends_with($host, '.tr')) {
+            return in_array('tr', $validLangs) ? 'tr' : 'en';
+        }
+
+        return in_array('en', $validLangs) ? 'en' : 'tr';
     }
 
 }
